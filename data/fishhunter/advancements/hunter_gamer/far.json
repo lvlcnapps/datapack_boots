@@ -1,0 +1,49 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:netherite_axe"
+        },
+        "title": "Sucker",
+        "description": "Leave The Battlefield",
+        "background": "minecraft:textures/block/netherite_block.png",
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "parent": "fishhunter:hunter_gamer/root",
+    "criteria": {
+        "leave_map": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:location_check",
+                        "offsetX": 500,
+                        "offsetZ": 500,
+                        "predicate": {
+                            "position": {
+                                "x": {
+                                    "min": 900,
+                                    "max": 1100
+                                },
+                                "z": {
+                                    "min": -700,
+                                    "max": -400
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "leave_map"
+        ]
+    ],
+    "rewards": {
+        "function": "fishhunter:test"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:netherite_axe"
+        },
+        "title": "Ghastly Killer",
+        "description": "Kill 10 boots",
+        "background": "minecraft:textures/block/netherite_block.png",
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "fishhunter:hunter_gamer/root",
+    "criteria": {
+        "killed_smbd": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "killCount": 10
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "killed_smbd"
+        ]
+    ],
+    "rewards": {
+        "function": "fishhunter:test"
+    }
+}

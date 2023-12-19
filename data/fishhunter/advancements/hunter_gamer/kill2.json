@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:netherite_axe"
+        },
+        "title": "Absolute Destroyer",
+        "description": "Kill 50 boots",
+        "background": "minecraft:textures/block/netherite_block.png",
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "fishhunter:hunter_gamer/kill1",
+    "criteria": {
+        "killed_smbd": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "killCount": 50
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "killed_smbd"
+        ]
+    ],
+    "rewards": {
+        "function": "fishhunter:test"
+    }
+}

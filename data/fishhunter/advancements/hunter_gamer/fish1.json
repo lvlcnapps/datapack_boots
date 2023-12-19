@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:wither_skeleton_skull"
+        },
+        "title": "Master Fisherman",
+        "description": "Bring 10 fishes",
+        "background": "minecraft:textures/block/netherite_block.png",
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "fishhunter:hunter_gamer/root",
+    "criteria": {
+        "bring_fishes": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "fishCount": 10
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "bring_fishes"
+        ]
+    ],
+    "rewards": {
+        "function": "fishhunter:test"
+    }
+}
