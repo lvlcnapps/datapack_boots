@@ -1,11 +1,13 @@
 say start
 
+function fishhunter:update_map
+
 spawnpoint @a 207 52 -99
 
 bossbar set minecraft:timer players sdsdcc2442
 bossbar set minecraft:timer players @a
 
-tag @a[x = 214, y = 52, z = -93, dx = 5, dy = 3, dz = 6] add hunter
+tag @a[x = 212, y = 52, z = -96, dx = 5, dy = 3, dz = 6] add hunter
 
 effect give @a minecraft:invisibility infinite 1 true
 gamemode adventure @a
