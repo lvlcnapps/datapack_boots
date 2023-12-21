@@ -18,6 +18,10 @@ execute as @p[tag=hunter, scores={counter=..500}] run bossbar set minecraft:time
 execute as @p[tag=hunter, scores={counter=500..1500}] run bossbar set minecraft:timer color yellow
 execute as @p[tag=hunter, scores={counter=1500..}] run bossbar set minecraft:timer color green
 
+execute at @a[x=199, y=73, z=-98, dx=0,dy=2,dz=16, tag=hunter] run tp @a[x=199, y=73, z=-98, dx=0,dy=2,dz=16, tag=hunter] ~-1 ~ ~
+execute at @a[x=217, y=73, z=-98, dx=0,dy=2,dz=16, tag=hunter] run tp @a[x=217, y=73, z=-98, dx=0,dy=2,dz=16, tag=hunter] ~1 ~ ~
+execute at @a[x=200, y=73, z=-81, dx=16,dy=2,dz=0, tag=hunter] run tp @a[x=200, y=73, z=-81, dx=16,dy=2,dz=0, tag=hunter] ~ ~ ~1
+
 scoreboard players remove @a[tag=hunter, scores={cooldown=0..}] cooldown 1
 execute as @a[scores={cooldown=0}] run function fishhunter:refresh
 
