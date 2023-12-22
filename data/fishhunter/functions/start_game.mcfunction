@@ -9,6 +9,10 @@ bossbar set minecraft:timer players @a
 
 tag @a[x = 212, y = 52, z = -96, dx = 5, dy = 3, dz = 6] add hunter
 
+scoreboard players set @a bootsCount -1
+execute as @a[tag=!hunter] run scoreboard players add @a bootsCount 1
+scoreboard players add @a bootsCount 1
+
 effect give @a minecraft:invisibility infinite 1 true
 gamemode adventure @a
 item replace entity @a armor.feet with minecraft:netherite_boots

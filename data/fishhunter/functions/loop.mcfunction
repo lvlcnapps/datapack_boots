@@ -25,7 +25,13 @@ execute at @a[x=200, y=73, z=-81, dx=16,dy=2,dz=0, tag=hunter] run tp @a[x=200, 
 scoreboard players remove @a[tag=hunter, scores={cooldown=0..}] cooldown 1
 execute as @a[scores={cooldown=0}] run function fishhunter:refresh
 
-execute as @a[scores={mode_respawn = 0, deaths=1..}] run function fishhunter:spec
+scoreboard players set @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd 200
+effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:speed infinite 3 true
+effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50 true
+execute as @a[tag=!hunter, scores={mode_respawn = 0, deaths=1..}] run scoreboard players remove @a bootsCount 1
+execute as @a[tag=!hunter, scores={mode_respawn = 0, deaths=1..}] run function fishhunter:spec
+scoreboard players set @a[scores={mode_respawn = 0, deaths=1..}] deaths 0
+execute as @a[scores={mode_respawn = 0, bootsCount=0}] run function fishhunter:hunter_win
 
 scoreboard players set @a[scores={mode_respawn = 1, deaths=1..}] dead_cd 200
 # effect give @a[scores={mode_respawn = 1, deaths=1..}] minecraft:invisibility infinite 1 true
