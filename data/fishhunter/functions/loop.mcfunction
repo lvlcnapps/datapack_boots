@@ -25,6 +25,9 @@ execute at @a[x=200, y=73, z=-81, dx=16,dy=2,dz=0, tag=hunter] run tp @a[x=200, 
 scoreboard players remove @a[tag=hunter, scores={cooldown=0..}] cooldown 1
 execute as @a[scores={cooldown=0}] run function fishhunter:refresh
 
+execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run clear @a[tag=!hunter, scores={deaths=1.., lost_fish = 0}] minecraft:pufferfish 1
+execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
+
 scoreboard players set @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd 200
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:speed infinite 3 true
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50 true
