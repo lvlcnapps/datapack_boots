@@ -1,0 +1,1 @@
+tellraw @a {"text":"Ой-вей!","color":"red"}
