@@ -7,6 +7,7 @@ setblock 154 70 -146 minecraft:redstone_block destroy
 setblock 113 73 18 minecraft:redstone_block destroy
 setblock 118 71 -37 minecraft:redstone_block destroy
 setblock 201 79 -142 minecraft:redstone_block destroy
+setblock 115 64 -120 minecraft:redstone_block destroy
 
 # function fishhunter:delete_shit
 schedule function fishhunter:delete_shit 5s replace

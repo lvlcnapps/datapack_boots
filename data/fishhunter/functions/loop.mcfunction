@@ -28,7 +28,8 @@ execute as @a[scores={cooldown=0}] run function fishhunter:refresh
 execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run clear @a[tag=!hunter, scores={deaths=1.., lost_fish = 0}] minecraft:pufferfish 1
 execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
 
-scoreboard players set @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd 200
+#scoreboard players set @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd 200
+scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:speed infinite 3 true
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50 true
 execute as @a[tag=!hunter, scores={mode_respawn = 0, deaths=1..}] run scoreboard players remove @a bootsCount 1
@@ -36,7 +37,8 @@ execute as @a[tag=!hunter, scores={mode_respawn = 0, deaths=1..}] run function f
 scoreboard players set @a[scores={mode_respawn = 0, deaths=1..}] deaths 0
 execute as @a[scores={mode_respawn = 0, bootsCount=0}] run function fishhunter:hunter_win
 
-scoreboard players set @a[scores={mode_respawn = 1, deaths=1..}] dead_cd 200
+#scoreboard players set @a[scores={mode_respawn = 1, deaths=1..}] dead_cd 200
+scoreboard players operation @a[scores={mode_respawn = 1, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
 # effect give @a[scores={mode_respawn = 1, deaths=1..}] minecraft:invisibility infinite 1 true
 effect give @a[tag=hunter,scores={mode_respawn = 1, deaths=1..}] minecraft:speed infinite 3 true
 effect give @a[tag=hunter,scores={mode_respawn = 1, deaths=1..}] minecraft:strength infinite 50 true
@@ -45,5 +47,8 @@ scoreboard players remove @a[scores={dead_cd=0..}] dead_cd 1
 effect give @a[scores={dead_cd=0..}] minecraft:invisibility infinite 1 true
 execute at @a[tag=!hunter, scores={dead_cd=0}] run tp @a[tag=!hunter, scores={dead_cd=0}] 208 72 -90
 execute at @a[tag=hunter, scores={dead_cd=0}] run tp @a[tag=hunter, scores={dead_cd=0}] 204 52 -89
+
+execute as @p[scores={mode_respawn = 1}] run data modify block 216 53 -91 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @p[scores={mode_respawn = 0}] run data modify block 216 53 -91 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 
 execute store result bossbar minecraft:timer value run scoreboard players get @p[tag=hunter] counter

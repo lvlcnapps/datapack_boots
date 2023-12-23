@@ -26,8 +26,10 @@ give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":
 tp @a[tag=!hunter] 208 72 -90
 tp @a[tag=hunter] 204 52 -89
 
-scoreboard players set @a fish 7
+#scoreboard players set @a fish 7
+execute store result score @a fish run scoreboard players get @e[tag=global, limit=1] fish
 scoreboard players set @a fish_counter 0
 
-scoreboard players set @a[tag=hunter] counter 5000
+#scoreboard players set @a[tag=hunter] counter 12000
+execute store result score @a[tag=hunter] counter run scoreboard players get @e[tag=global, limit=1] counter
 execute store result bossbar minecraft:timer max run scoreboard players get @p[tag=hunter] counter
