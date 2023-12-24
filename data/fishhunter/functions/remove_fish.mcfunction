@@ -1,3 +1,4 @@
+# функция проёба рыбы - удаляет их с земли, чистит переменные, отбирает 1 значение от рыб
 kill @e[type=item, nbt={Item: {id:"minecraft:pufferfish"}}]
 scoreboard players set @a[tag=hunter] fish_win 0
 scoreboard players set @a[tag=!hunter, scores={dead_cd=0}] lost_fish 0
