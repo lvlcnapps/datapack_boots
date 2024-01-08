@@ -18,7 +18,8 @@ scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:feather"}}] mode_boo
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:rabbit_foot"}}] mode_boots 3
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:heart_of_the_sea"}}] mode_boots 4
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:clock"}}] mode_boots 5
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 6
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:amethyst_shard"}}] mode_boots 6
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 7
 
 # убирать плохолежащие рыбы
 execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age: 50s}] run function fishhunter:remove_fish
@@ -68,6 +69,19 @@ scoreboard players remove @a[scores={radar_reload = 0..}] radar_reload 1
 give @a[scores={radar_reload = 0}] minecraft:experience_bottle 1
 effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
 scoreboard players set @a is_radared -1
+
+execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
+execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
+scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
+execute at @a[scores={stun_used = 1..}] run summon minecraft:item_frame ~ ~ ~ {Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Tags: ["stun"], Item:{id: "minecraft:crying_obsidian", Count: 1b}}
+scoreboard players set @a[scores={stun_used = 1..}] stun_cd 100
+scoreboard players set @a[scores={stun_used = 1..}] stun_used 0
+execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:darkness 5 50 true
+execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:slowness 5 10 true
+execute at @a[tag=hunter] run kill @e[tag=stun, distance=..1]
+scoreboard players remove @a[scores={stun_cd = 0..}] stun_cd 1
+give @a[scores={stun_cd = 0}] minecraft:snowball 1
+
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd

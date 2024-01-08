@@ -37,6 +37,7 @@ effect give @a[tag=hunter] minecraft:strength infinite 50 true
 give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":false}]'},Enchantments:[{id:sharpness,lvl:100}]} 1
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
 give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:experience_bottle 1
+give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
 
 execute as @p[scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
 
