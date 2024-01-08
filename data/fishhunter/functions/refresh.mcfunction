@@ -25,8 +25,9 @@ tp @a 214 52 -101
 gamemode adventure @a
 
 # выдача предметов выбора класса
-item replace entity @a hotbar.0 with minecraft:lapis_lazuli{display:{Name:'[{"text":"Полуинвиз","italic":false, "color":"green"}]'}} 1
-item replace entity @a hotbar.1 with minecraft:feather{display:{Name:'[{"text":"Скорость","italic":false, "color":"green"}]'}} 1
-item replace entity @a hotbar.2 with minecraft:rabbit_foot{display:{Name:'[{"text":"Прыгун","italic":false, "color":"green"}]'}} 1
-item replace entity @a hotbar.3 with minecraft:heart_of_the_sea{display:{Name:'[{"text":"Танк","italic":false, "color":"green"}]'}} 1
-item replace entity @a hotbar.4 with minecraft:diamond{display:{Name:'[{"text":"-не работает-","italic":false, "color":"red"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.0 with minecraft:lapis_lazuli{display:{Name:'[{"text":"Полуинвиз","italic":false, "color":"green"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.1 with minecraft:feather{display:{Name:'[{"text":"Скорость","italic":false, "color":"green"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.2 with minecraft:rabbit_foot{display:{Name:'[{"text":"Прыгун","italic":false, "color":"green"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.3 with minecraft:heart_of_the_sea{display:{Name:'[{"text":"Танк","italic":false, "color":"green"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.4 with minecraft:clock{display:{Name:'[{"text":"Радар","italic":false, "color":"green"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.5 with minecraft:diamond{display:{Name:'[{"text":"-не работает-","italic":false, "color":"red"}]'}} 1

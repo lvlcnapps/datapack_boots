@@ -26,20 +26,25 @@ scoreboard players add @a bootsCount 1
 # выдача амуниции и эффектов всем подряд
 effect give @a minecraft:invisibility infinite 1 true
 gamemode adventure @a
-item replace entity @a armor.feet with minecraft:netherite_boots{Enchantments:[{id:unbreaking,lvl:255}]}
-item replace entity @a[scores={mode_boots = ..0}] armor.legs with minecraft:netherite_leggings{Enchantments:[{id:unbreaking,lvl:255}]}
-item replace entity @a[scores={mode_boots = 2..}] armor.legs with minecraft:netherite_leggings{Enchantments:[{id:unbreaking,lvl:255}]}
-item replace entity @a[tag=hunter] armor.legs with minecraft:netherite_leggings{Enchantments:[{id:unbreaking,lvl:255}]}
+item replace entity @a armor.feet with minecraft:netherite_boots
+item replace entity @a[scores={mode_boots = ..0}] armor.legs with minecraft:netherite_leggings
+item replace entity @a[scores={mode_boots = 2..}] armor.legs with minecraft:netherite_leggings
+item replace entity @a[tag=hunter] armor.legs with minecraft:netherite_leggings
 item replace entity @a[tag=hunter] armor.chest with minecraft:netherite_chestplate
 item replace entity @a[tag=hunter] armor.head with minecraft:wither_skeleton_skull
 effect give @a[tag=hunter] minecraft:speed infinite 3 true
 effect give @a[tag=hunter] minecraft:strength infinite 50 true
 give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":false}]'},Enchantments:[{id:sharpness,lvl:100}]} 1
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
+give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:experience_bottle 1
+
+execute as @p[scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
 
 # тп на нужные места - ботиночки в церковь, хантеры в хаб
 tp @a[tag=!hunter] 208 72 -90
 tp @a[tag=hunter] 204 52 -89
+
+execute as @p[scores={mode_respawn = 0}] run schedule function fishhunter:let_hunter_go 10s replace
 
 # подгрузка значения рыб и настройка счетчиков
 execute store result score @a fish run scoreboard players get @e[tag=global, limit=1] fish

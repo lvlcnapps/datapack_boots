@@ -9,8 +9,16 @@ item replace entity @a[scores={tank_live = 1..}] weapon.offhand with minecraft:t
 scoreboard players set @a[scores={tank_live = ..0}] tank_relo 0
 scoreboard players set @a[scores={tank_live = 0}] tank_cd 200
 
+clear @a[scores={tank_cd = 0..}] minecraft:totem_of_undying
 scoreboard players remove @a[scores={tank_cd = 0..}] tank_cd 1
 give @a[scores={tank_cd = 0}] minecraft:honey_bottle 1
+
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:lapis_lazuli"}}] mode_boots 1
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:feather"}}] mode_boots 2
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:rabbit_foot"}}] mode_boots 3
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:heart_of_the_sea"}}] mode_boots 4
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:clock"}}] mode_boots 5
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 6
 
 # убирать плохолежащие рыбы
 execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age: 50s}] run function fishhunter:remove_fish
@@ -47,10 +55,19 @@ execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run c
 execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
 
 # эффекты классов
-execute as @e[tag=!hunter, scores={game=1}] run effect give @a[scores={mode_boots = 2}] minecraft:speed infinite 0 true
-execute as @e[tag=!hunter, scores={game=1}] run effect give @a[scores={mode_boots = 3}] minecraft:jump_boost infinite 0 true
+effect give @a[tag=!hunter, scores={mode_boots = 2, game=1}] minecraft:speed infinite 0 true
+effect give @a[tag=!hunter, scores={mode_boots = 3, game=1}] minecraft:jump_boost infinite 1 true
 give @a[tag=!hunter, scores={tank_reload = 1..}] minecraft:enchanted_golden_apple 1
 scoreboard players set @a[tag=!hunter, scores={tank_reload = 1..}] tank_reload 0
+
+execute store success score @a[tag=!hunter, level=1.., scores={mode_boots = 5}] is_radared run execute at @a[tag=!hunter, level=1.., scores={mode_boots = 5}] run effect give @a[tag=hunter, distance=..15] minecraft:glowing 3 1 true
+xp set @a[tag=!hunter, scores = {mode_boots = 5}, level=1..] 0 levels
+scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_reload 100
+scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_used 0
+scoreboard players remove @a[scores={radar_reload = 0..}] radar_reload 1
+give @a[scores={radar_reload = 0}] minecraft:experience_bottle 1
+effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
+scoreboard players set @a is_radared -1
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
@@ -80,10 +97,10 @@ execute as @p[scores={mode_respawn = 0}] run data modify block 216 53 -91 front_
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @p[tag=hunter] counter
 
-item replace entity @a[scores={br_boots = 1..}] armor.feet with minecraft:netherite_boots{Enchantments:[{id:unbreaking,lvl:255}]}
+item replace entity @a[scores={br_boots = 1..}] armor.feet with minecraft:netherite_boots
 scoreboard players set @a[scores={br_boots = 1..}] br_boots 0
 
-item replace entity @a[scores={br_legs = 1..}] armor.legs with minecraft:netherite_leggings{Enchantments:[{id:unbreaking,lvl:255}]}
+item replace entity @a[scores={br_legs = 1..}] armor.legs with minecraft:netherite_leggings
 scoreboard players set @a[scores={br_legs = 1..}] br_legs 0
 
 effect give @a[scores={totem_used = 1..}] minecraft:invisibility infinite 1 true
