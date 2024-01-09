@@ -2,17 +2,18 @@
 scoreboard players remove @a[tag=hunter, scores={counter=0..}] counter 1
 execute as @a[scores={counter=0}] run function fishhunter:hunter_win
 
+# работа класса танк
 scoreboard players set @a[scores={mode_boots = 4, tank_relo = 1.., tank_live = ..-1}] tank_live 100
 scoreboard players remove @a[scores={tank_live = 0..}] tank_live 1
 clear @a[scores={tank_live = 0..}] minecraft:glass_bottle
 item replace entity @a[scores={tank_live = 1..}] weapon.offhand with minecraft:totem_of_undying
 scoreboard players set @a[scores={tank_live = ..0}] tank_relo 0
 scoreboard players set @a[scores={tank_live = 0}] tank_cd 200
-
 clear @a[scores={tank_cd = 0..}] minecraft:totem_of_undying
 scoreboard players remove @a[scores={tank_cd = 0..}] tank_cd 1
 give @a[scores={tank_cd = 0}] minecraft:honey_bottle 1
 
+# распределение по классам ботиночков
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:lapis_lazuli"}}] mode_boots 1
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:feather"}}] mode_boots 2
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:rabbit_foot"}}] mode_boots 3
@@ -56,11 +57,14 @@ execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run c
 execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
 
 # эффекты классов
-effect give @a[tag=!hunter, scores={mode_boots = 2, game=1}] minecraft:speed infinite 0 true
-effect give @a[tag=!hunter, scores={mode_boots = 3, game=1}] minecraft:jump_boost infinite 1 true
+# effect give @a[tag=!hunter, scores={mode_boots = 2, game=1}] minecraft:speed infinite 0 true
+# effect give @a[tag=!hunter, scores={mode_boots = 3, game=1}] minecraft:jump_boost infinite 1 true
+execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 2}] minecraft:speed infinite 0 true
+execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 3}] minecraft:jump_boost infinite 1 true
 give @a[tag=!hunter, scores={tank_reload = 1..}] minecraft:enchanted_golden_apple 1
 scoreboard players set @a[tag=!hunter, scores={tank_reload = 1..}] tank_reload 0
 
+# работа класса радар
 execute store success score @a[tag=!hunter, level=1.., scores={mode_boots = 5}] is_radared run execute at @a[tag=!hunter, level=1.., scores={mode_boots = 5}] run effect give @a[tag=hunter, distance=..15] minecraft:glowing 3 1 true
 xp set @a[tag=!hunter, scores = {mode_boots = 5}, level=1..] 0 levels
 scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_reload 100
@@ -70,18 +74,38 @@ give @a[scores={radar_reload = 0}] minecraft:experience_bottle 1
 effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
 scoreboard players set @a is_radared -1
 
+# работа класса стан
+# execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
+# execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
+# scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
+# execute at @a[scores={stun_used = 1..}] run summon minecraft:item_frame ~ ~ ~ {Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Tags: ["stun"], Item:{id: "minecraft:crying_obsidian", Count: 1b}}
+# scoreboard players set @a[scores={stun_used = 1..}] stun_cd 100
+# scoreboard players set @a[scores={stun_used = 1..}] stun_used 0
+# execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:darkness 5 50 true
+# execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:slowness 5 10 true
+# execute at @a[tag=hunter] run kill @e[tag=stun, distance=..1]
+# scoreboard players remove @a[scores={stun_cd = 0..}] stun_cd 1
+# give @a[scores={stun_cd = 0}] minecraft:snowball 1
+
+# работа класса стан 2.0
 execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
 execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
 scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
-execute at @a[scores={stun_used = 1..}] run summon minecraft:item_frame ~ ~ ~ {Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Tags: ["stun"], Item:{id: "minecraft:crying_obsidian", Count: 1b}}
+execute at @a[scores={stun_used = 1..}] run summon minecraft:piglin ~ ~ ~ {NoAI:1b,PersistenceRequired:0b,CanPickUpLoot:0b,Silent:1,Age:0,ArmorItems:[{id:"minecraft:netherite_boots",Count:1},{id:"minecraft:netherite_leggings",Count:1},{},{}],ActiveEffects:[{Id:14,Amplifier:0,Duration:2147483647,ShowParticles:0b}],Tags:["stun"]}
 scoreboard players set @a[scores={stun_used = 1..}] stun_cd 100
+scoreboard players set @a[scores={stun_used = 1..}] stun_live 600
 scoreboard players set @a[scores={stun_used = 1..}] stun_used 0
-execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:darkness 5 50 true
-execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:slowness 5 10 true
-execute at @a[tag=hunter] run kill @e[tag=stun, distance=..1]
+execute as @a[scores={killed_fake = 1..}] run scoreboard players set @a[scores={stun_live = 0..}] stun_live -1
+effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:darkness 3 50 true
+effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:slowness 3 50 true
+effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:jump_boost 3 128 true
+execute as @a[scores={killed_fake = 1..}] run title @a[scores={mode_boots = 6}] actionbar {"text":"Stunned","bold":true,"color":"blue"}
+scoreboard players set @a[scores={killed_fake = 1..}] killed_fake 0
 scoreboard players remove @a[scores={stun_cd = 0..}] stun_cd 1
+scoreboard players remove @a[scores={stun_live = 0..}] stun_live 1
 give @a[scores={stun_cd = 0}] minecraft:snowball 1
-
+execute as @a[scores={stun_live = 0}] run kill @e[tag=stun]
+execute as @a[scores={stun_live = 0}] run title @a[scores={mode_boots = 6}] actionbar {"text":"Destroyed","bold":true,"color":"blue"}
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
@@ -105,17 +129,24 @@ execute at @a[tag=hunter, scores={dead_cd=0}] run tp @a[tag=hunter, scores={dead
 scoreboard players set @a[tag=!hunter] lost_fish 0
 
 # красивый текст на табличке
-execute as @p[scores={mode_respawn = 1}] run data modify block 216 53 -91 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
-execute as @p[scores={mode_respawn = 0}] run data modify block 216 53 -91 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+execute as @p[scores={mode_respawn = 1}] run data modify block 188 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @p[scores={mode_respawn = 0}] run data modify block 188 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+data modify block 201 9 -71 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"counter"}}', '{"text":""}', '{"text":""}']
+data modify block 204 9 -73 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"add_time"}}', '{"text":""}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={class_toggle = 0}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+
 
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @p[tag=hunter] counter
 
+# замена сломанных штанов и ботиночков
 item replace entity @a[scores={br_boots = 1..}] armor.feet with minecraft:netherite_boots
 scoreboard players set @a[scores={br_boots = 1..}] br_boots 0
 
 item replace entity @a[scores={br_legs = 1..}] armor.legs with minecraft:netherite_leggings
 scoreboard players set @a[scores={br_legs = 1..}] br_legs 0
 
+# костыль
 effect give @a[scores={totem_used = 1..}] minecraft:invisibility infinite 1 true
 scoreboard players set @a totem_used 0

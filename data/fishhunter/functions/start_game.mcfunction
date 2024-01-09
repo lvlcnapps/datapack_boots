@@ -16,7 +16,8 @@ scoreboard players set @e[tag=global] game 1
 clear @a
 
 # назначить игроков в комнате хантерами
-tag @a[x = 212, y = 52, z = -96, dx = 5, dy = 3, dz = 6] add hunter
+# tag @a[x = 212, y = 52, z = -96, dx = 5, dy = 3, dz = 6] add hunter
+tag @a[x=184, y=7, z=-111, dx=21, dy=10, dz=41] add hunter
 
 # посчитать количество ботиночков перед игрой
 scoreboard players set @a bootsCount -1

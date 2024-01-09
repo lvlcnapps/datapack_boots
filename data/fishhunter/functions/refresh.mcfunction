@@ -21,7 +21,7 @@ effect clear @a
 tag @a remove hunter
 
 # тп на нужное место с параметром
-tp @a 214 52 -101
+tp @a 195 0 -100
 gamemode adventure @a
 
 # выдача предметов выбора класса
