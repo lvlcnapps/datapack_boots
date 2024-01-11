@@ -39,6 +39,8 @@ give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
 give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:experience_bottle 1
 give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
+give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:ender_pearl 1
+give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
 
 execute as @p[scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
 
@@ -55,15 +57,3 @@ scoreboard players set @a fish_counter 0
 # настройка глобального счетчика времени и максимального значения боссбара
 execute store result score @a[tag=hunter] counter run scoreboard players get @e[tag=global, limit=1] counter
 execute store result bossbar minecraft:timer max run scoreboard players get @p[tag=hunter] counter
-
-# 1) полуинвиз, видно только ботинки, нету штанов
-# 2) быстрый чел speed 1
-# 3) паркурист, высокие прыжки
-# 4) чел танк
-# 5) телепорты
-# 6) радар (в некотором радиусе по нажатию кнопки будет подсвечивать хантера, в случае, если хантер не нашелся, подсветится сам)
-
-# /summon minecraft:item_frame ~ ~ ~ {Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Item:{id: "minecraft:raw_gold_block", Count: 1b}}
-# /kill @e[nbt= {Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Item:{id: "minecraft:raw_gold_block", Count: 1b}}]
-# scoreboard players set @a nearTP 0
-# execute as @a at @s if entity @e[distance=..7, limit=1,nbt= {Facing:1b, Invisible: 1b, Item:{id: "minecraft:raw_gold_block", Count: 1b}}] run scoreboard players set @s nearTP 1

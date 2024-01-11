@@ -20,7 +20,8 @@ scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:rabbit_foot"}}] mode
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:heart_of_the_sea"}}] mode_boots 4
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:clock"}}] mode_boots 5
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:amethyst_shard"}}] mode_boots 6
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 7
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:blaze_powder"}}] mode_boots 7
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 8
 
 # убирать плохолежащие рыбы
 execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age: 50s}] run function fishhunter:remove_fish
@@ -106,6 +107,26 @@ scoreboard players remove @a[scores={stun_live = 0..}] stun_live 1
 give @a[scores={stun_cd = 0}] minecraft:snowball 1
 execute as @a[scores={stun_live = 0}] run kill @e[tag=stun]
 execute as @a[scores={stun_live = 0}] run title @a[scores={mode_boots = 6}] actionbar {"text":"Destroyed","bold":true,"color":"blue"}
+
+# работа класса телепорт
+execute as @a[scores={tp_spawn = 1..}] run kill @e[tag=mark]
+execute at @a[scores={tp_spawn = 1..}] run summon minecraft:item_frame ~ ~ ~ {Tags:["mark"], Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Item:{id: "minecraft:raw_gold_block", Count: 1b}}
+scoreboard players set @a[scores={tp_spawn = 1..}] tp_reload 100
+scoreboard players set @a[scores={tp_spawn = 1..}] tp_spawn 0
+give @a[scores={tp_reload = 0}] minecraft:suspicious_stew 1
+scoreboard players remove @a[scores={tp_reload = 0..}] tp_reload 1
+kill @e[type=minecraft:ender_pearl]
+execute as @a[scores={tp_toggle = 1..}] at @s if entity @e[distance=..15, limit=1,tag=mark] run tp @a[scores={tp_toggle = 1..}] @e[limit=1,tag=mark]
+# execute as @a[scores={tp_toggle = 1..}] at @s if entity @e[distance=..15, limit=1,tag=mark] run execute as @a[scores={tp_toggle = 1..}] run tp @s ~ ~ ~ ~ 0
+give @a[scores={tp_toggle = 1..}] minecraft:ender_pearl 1
+clear @a minecraft:bowl
+# scoreboard players set @a[scores={tp_toggle = 1..}] tp_toggle 0
+execute as @a[scores={mode_boots=7}] at @s if entity @e[distance=..15, limit=1,tag=mark] run scoreboard players set @s tp_near 1
+title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
+title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"You can't tp","bold":true,"color":"red"}
+execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
+execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"You can't tp","bold":true,"color":"red"}
+scoreboard players set @a tp_near 0
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
