@@ -58,8 +58,6 @@ execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run c
 execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
 
 # эффекты классов
-# effect give @a[tag=!hunter, scores={mode_boots = 2, game=1}] minecraft:speed infinite 0 true
-# effect give @a[tag=!hunter, scores={mode_boots = 3, game=1}] minecraft:jump_boost infinite 1 true
 execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 2}] minecraft:speed infinite 0 true
 execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 3}] minecraft:jump_boost infinite 1 true
 give @a[tag=!hunter, scores={tank_reload = 1..}] minecraft:enchanted_golden_apple 1
@@ -76,19 +74,6 @@ effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
 scoreboard players set @a is_radared -1
 
 # работа класса стан
-# execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
-# execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
-# scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
-# execute at @a[scores={stun_used = 1..}] run summon minecraft:item_frame ~ ~ ~ {Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Tags: ["stun"], Item:{id: "minecraft:crying_obsidian", Count: 1b}}
-# scoreboard players set @a[scores={stun_used = 1..}] stun_cd 100
-# scoreboard players set @a[scores={stun_used = 1..}] stun_used 0
-# execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:darkness 5 50 true
-# execute at @e[tag=stun] run effect give @a[tag=hunter, distance=..1] minecraft:slowness 5 10 true
-# execute at @a[tag=hunter] run kill @e[tag=stun, distance=..1]
-# scoreboard players remove @a[scores={stun_cd = 0..}] stun_cd 1
-# give @a[scores={stun_cd = 0}] minecraft:snowball 1
-
-# работа класса стан 2.0
 execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
 execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
 scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
@@ -122,11 +107,10 @@ give @a[scores={tp_toggle = 1..}] minecraft:ender_pearl 1
 clear @a minecraft:bowl
 # scoreboard players set @a[scores={tp_toggle = 1..}] tp_toggle 0
 execute as @a[scores={mode_boots=7}] at @s if entity @e[distance=..15, limit=1,tag=mark] run scoreboard players set @s tp_near 1
-title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
-title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"You can't tp","bold":true,"color":"red"}
 execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
-execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"You can't tp","bold":true,"color":"red"}
 scoreboard players set @a tp_near 0
+execute if entity @e[tag=mark, x=199, y = 70, z=-111, dx = 18, dy = 50, dz=30] run title @a[scores={mode_boots = 7}] actionbar {"text":"ABORTED","bold":true,"color":"red"}
+kill @e[tag=mark, x=199, y = 70, z=-111, dx = 18, dy = 50, dz=30]
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd

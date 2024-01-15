@@ -12,6 +12,7 @@ setblock 117 69 -66 minecraft:redstone_block destroy
 setblock 161 75 16 minecraft:redstone_block destroy
 
 kill @e[tag=stun]
+kill @e[tag=mark]
 
 # через некоторое время удалить все выпавшие рамки и т п
 schedule function fishhunter:delete_shit 5s replace
