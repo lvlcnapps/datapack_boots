@@ -36,6 +36,7 @@ item replace entity @a[tag=hunter] armor.head with minecraft:wither_skeleton_sku
 effect give @a[tag=hunter] minecraft:speed infinite 3 true
 effect give @a[tag=hunter] minecraft:strength infinite 50 true
 give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":false}]'},Enchantments:[{id:sharpness,lvl:100}]} 1
+give @a[tag=!hunter] carrot_on_a_stick{display:{Name:'[{"text":"Датчик","italic":false}]'},RepairCost:1,Unbreakable:1b,Damage:1} 1
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
 give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:experience_bottle 1
 give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
@@ -60,3 +61,5 @@ execute store result bossbar minecraft:timer max run scoreboard players get @p[t
 
 team join hunter @a[tag=hunter]
 team join boots @a[tag=!hunter]
+
+execute store result score @e[tag=global] bootsCount run scoreboard players get @p[tag=!hunter] bootsCount

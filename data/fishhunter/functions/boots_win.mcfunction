@@ -1,3 +1,5 @@
+function fishhunter:logging
+
 # текст
 tellraw @a "рыбы мои рыбы"
 

@@ -158,9 +158,3 @@ scoreboard players set @a[scores={br_legs = 1..}] br_legs 0
 # костыль
 effect give @a[scores={totem_used = 1..}] minecraft:invisibility infinite 1 true
 scoreboard players set @a totem_used 0
-
-# запретить ставить на лесах
-# кулдаун
-
-# вещь, по нажатию на которую стата по рычагам
-# 
