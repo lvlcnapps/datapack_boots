@@ -14,5 +14,11 @@ setblock 161 75 16 minecraft:redstone_block destroy
 kill @e[tag=stun]
 kill @e[tag=mark]
 
+scoreboard players set @e[tag=levers] gekko 0
+scoreboard players set @e[tag=levers] barbie 0
+scoreboard players set @e[tag=levers] elves 0
+scoreboard players set @e[tag=levers] frog 0
+scoreboard players set @e[tag=levers] bomj 0
+
 # через некоторое время удалить все выпавшие рамки и т п
 schedule function fishhunter:delete_shit 5s replace

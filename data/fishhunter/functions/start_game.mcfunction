@@ -57,3 +57,6 @@ scoreboard players set @a fish_counter 0
 # настройка глобального счетчика времени и максимального значения боссбара
 execute store result score @a[tag=hunter] counter run scoreboard players get @e[tag=global, limit=1] counter
 execute store result bossbar minecraft:timer max run scoreboard players get @p[tag=hunter] counter
+
+team join hunter @a[tag=hunter]
+team join boots @a[tag=!hunter]

@@ -2,6 +2,8 @@
 scoreboard players remove @a[tag=hunter, scores={counter=0..}] counter 1
 execute as @a[scores={counter=0}] run function fishhunter:hunter_win
 
+execute as @a[scores={check = 1..}] run function fishhunter:show_levers
+
 # работа класса танк
 scoreboard players set @a[scores={mode_boots = 4, tank_relo = 1.., tank_live = ..-1}] tank_live 100
 scoreboard players remove @a[scores={tank_live = 0..}] tank_live 1
@@ -64,13 +66,13 @@ give @a[tag=!hunter, scores={tank_reload = 1..}] minecraft:enchanted_golden_appl
 scoreboard players set @a[tag=!hunter, scores={tank_reload = 1..}] tank_reload 0
 
 # работа класса радар
-execute store success score @a[tag=!hunter, level=1.., scores={mode_boots = 5}] is_radared run execute at @a[tag=!hunter, level=1.., scores={mode_boots = 5}] run effect give @a[tag=hunter, distance=..15] minecraft:glowing 3 1 true
+execute store success score @a[tag=!hunter, level=1.., scores={mode_boots = 5}] is_radared run execute at @a[tag=!hunter, level=1.., scores={mode_boots = 5}] run effect give @a[tag=hunter, distance=..75] minecraft:glowing 3 1 true
 xp set @a[tag=!hunter, scores = {mode_boots = 5}, level=1..] 0 levels
-scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_reload 100
+scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_reload 400
 scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_used 0
 scoreboard players remove @a[scores={radar_reload = 0..}] radar_reload 1
 give @a[scores={radar_reload = 0}] minecraft:experience_bottle 1
-effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
+# effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
 scoreboard players set @a is_radared -1
 
 # работа класса стан
@@ -108,6 +110,7 @@ clear @a minecraft:bowl
 # scoreboard players set @a[scores={tp_toggle = 1..}] tp_toggle 0
 execute as @a[scores={mode_boots=7}] at @s if entity @e[distance=..15, limit=1,tag=mark] run scoreboard players set @s tp_near 1
 execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
+execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"","bold":true,"color":"green"}
 scoreboard players set @a tp_near 0
 execute if entity @e[tag=mark, x=199, y = 70, z=-111, dx = 18, dy = 50, dz=30] run title @a[scores={mode_boots = 7}] actionbar {"text":"ABORTED","bold":true,"color":"red"}
 kill @e[tag=mark, x=199, y = 70, z=-111, dx = 18, dy = 50, dz=30]
@@ -155,3 +158,9 @@ scoreboard players set @a[scores={br_legs = 1..}] br_legs 0
 # костыль
 effect give @a[scores={totem_used = 1..}] minecraft:invisibility infinite 1 true
 scoreboard players set @a totem_used 0
+
+# запретить ставить на лесах
+# кулдаун
+
+# вещь, по нажатию на которую стата по рычагам
+# 
