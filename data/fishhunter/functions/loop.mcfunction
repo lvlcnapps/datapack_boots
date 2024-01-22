@@ -151,8 +151,8 @@ data modify block 201 9 -71 front_text.messages set value ['{"text":""}', '{"sco
 data modify block 204 9 -73 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"add_time"}}', '{"text":""}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 0}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
-execute as @e[tag=global,limit=1,scores={diff_chat = 1}] run data modify block 185 8 -81 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
-execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 185 8 -81 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={diff_chat = 1}] run data modify block 185 8 -74 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 185 8 -74 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @e[tag=timers, limit=1] counter

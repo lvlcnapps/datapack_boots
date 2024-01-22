@@ -33,6 +33,7 @@ item replace entity @a[scores={mode_boots = 2..}] armor.legs with minecraft:neth
 item replace entity @a[tag=hunter] armor.legs with minecraft:netherite_leggings
 item replace entity @a[tag=hunter] armor.chest with minecraft:netherite_chestplate
 item replace entity @a[tag=hunter] armor.head with minecraft:wither_skeleton_skull
+execute as @a[tag=hunter] run function fishhunter:make_skin
 effect give @a[tag=hunter] minecraft:speed infinite 3 true
 effect give @a[tag=hunter] minecraft:strength infinite 50 true
 give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":false}]'},Enchantments:[{id:sharpness,lvl:100}]} 1
