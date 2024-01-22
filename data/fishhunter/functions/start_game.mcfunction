@@ -20,9 +20,9 @@ clear @a
 tag @a[x=184, y=7, z=-111, dx=21, dy=10, dz=41] add hunter
 
 # посчитать количество ботиночков перед игрой
-scoreboard players set @a bootsCount -1
-execute as @a[tag=!hunter] run scoreboard players add @a bootsCount 1
-scoreboard players add @a bootsCount 1
+scoreboard players set @e[tag=timers] bootsCount -1
+execute as @a[tag=!hunter] run scoreboard players add @e[tag=timers] bootsCount 1
+scoreboard players add @e[tag=timers] bootsCount 1
 
 # выдача амуниции и эффектов всем подряд
 effect give @a minecraft:invisibility infinite 1 true
@@ -43,13 +43,13 @@ give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:ender_pearl 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
 
-execute as @p[scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
+execute as @e[tag=global, scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
 
 # тп на нужные места - ботиночки в церковь, хантеры в хаб
 tp @a[tag=!hunter] 208 72 -90
 tp @a[tag=hunter] 204 52 -89
 
-execute as @p[scores={mode_respawn = 0}] run schedule function fishhunter:let_hunter_go 10s replace
+execute as @e[tag=global, scores={mode_respawn = 0}] run schedule function fishhunter:let_hunter_go 10s replace
 
 # подгрузка значения рыб и настройка счетчиков
 execute store result score @a fish run scoreboard players get @e[tag=global, limit=1] fish
@@ -62,4 +62,4 @@ execute store result bossbar minecraft:timer max run scoreboard players get @e[t
 team join hunter @a[tag=hunter]
 team join boots @a[tag=!hunter]
 
-execute store result score @e[tag=global] bootsCount run scoreboard players get @p[tag=!hunter] bootsCount
+execute store result score @e[tag=global] bootsCount run scoreboard players get @e[tag=timers, limit=1] bootsCount

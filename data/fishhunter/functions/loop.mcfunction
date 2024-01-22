@@ -124,13 +124,13 @@ execute if entity @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8
 kill @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8]
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
-scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
+execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players operation @a[tag=hunter, scores={deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:speed infinite 3 true
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50 true
-execute as @a[tag=!hunter, scores={mode_respawn = 0, deaths=1..}] run scoreboard players remove @a bootsCount 1
-execute as @a[tag=!hunter, scores={mode_respawn = 0, deaths=1..}] run function fishhunter:spec
-scoreboard players set @a[scores={mode_respawn = 0, deaths=1.., lost_fish = 0}] deaths 0
-execute as @a[scores={mode_respawn = 0, bootsCount=0}] run function fishhunter:hunter_win
+execute as @a[tag=!hunter, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run scoreboard players remove @e[tag=timers] bootsCount 1
+execute as @a[tag=!hunter, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:spec
+execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players set @a[scores={deaths=1.., lost_fish = 0}] deaths 0
+execute as @e[tag=timers,scores={bootsCount=0}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:hunter_win
 
 # поведение игры при чьй то смерти при вкл респавне, тп на нужные места по кулдауну с выдачей всех эффектов
 scoreboard players operation @a[scores={mode_respawn = 1, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
@@ -145,8 +145,8 @@ execute at @a[tag=hunter, scores={dead_cd=0}] run tp @a[tag=hunter, scores={dead
 scoreboard players set @a[tag=!hunter] lost_fish 0
 
 # красивый текст на табличке
-execute as @p[scores={mode_respawn = 1}] run data modify block 188 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
-execute as @p[scores={mode_respawn = 0}] run data modify block 188 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+execute as @e[tag=global,scores={mode_respawn = 1}] run data modify block 188 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,scores={mode_respawn = 0}] run data modify block 188 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow respawn:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 data modify block 201 9 -71 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"counter"}}', '{"text":""}', '{"text":""}']
 data modify block 204 9 -73 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"add_time"}}', '{"text":""}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
