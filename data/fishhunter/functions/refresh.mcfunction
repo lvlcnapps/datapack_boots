@@ -7,6 +7,7 @@ scoreboard players set @a fish_add 0
 scoreboard players set @a fish_counter 0
 scoreboard players set @e[tag=timers] cooldown -1
 scoreboard players set hhuy mode_respawn -1
+scoreboard players set hhuy diff_chat -1
 scoreboard players set @a dead_cd -1
 scoreboard players set @e[tag=timers] bootsCount -1
 # execute store result score @a mode_respawn run scoreboard players get @p[scores={mode_respawn=0..1}] mode_respawn

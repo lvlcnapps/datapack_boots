@@ -1,3 +1,5 @@
+scoreboard players set @e[tag=global] winner 1
+
 function fishhunter:logging
 
 # текст

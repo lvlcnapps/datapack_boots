@@ -1,3 +1,5 @@
+scoreboard players set @e[tag=global] winner 0
+
 function fishhunter:logging
 
 # восстановление рыбов, кулдаун после которого автореколл и очистка одной из переменных, чтоб не лагало

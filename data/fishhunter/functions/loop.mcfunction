@@ -133,10 +133,10 @@ execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players se
 execute as @e[tag=timers,scores={bootsCount=0}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:hunter_win
 
 # поведение игры при чьй то смерти при вкл респавне, тп на нужные места по кулдауну с выдачей всех эффектов
-scoreboard players operation @a[scores={mode_respawn = 1, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
-effect give @a[tag=hunter,scores={mode_respawn = 1, deaths=1..}] minecraft:speed infinite 3 true
-effect give @a[tag=hunter,scores={mode_respawn = 1, deaths=1..}] minecraft:strength infinite 50 true
-scoreboard players set @a[scores={mode_respawn = 1, deaths=1.., lost_fish = 0}] deaths 0
+execute as @e[tag = global, scores={mode_respawn = 1}] run scoreboard players operation @a[scores={deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
+execute as @e[tag = global, scores={mode_respawn = 1}] run effect give @a[tag=hunter,scores={deaths=1..}] minecraft:speed infinite 3 true
+execute as @e[tag = global, scores={mode_respawn = 1}] run effect give @a[tag=hunter,scores={deaths=1..}] minecraft:strength infinite 50 true
+execute as @e[tag = global, scores={mode_respawn = 1}] run scoreboard players set @a[scores={deaths=1.., lost_fish = 0}] deaths 0
 scoreboard players remove @a[scores={dead_cd=0..}] dead_cd 1
 effect give @a[scores={dead_cd=0..}] minecraft:invisibility infinite 1 true
 execute at @a[tag=!hunter, scores={dead_cd=0}] run tp @a[tag=!hunter, scores={dead_cd=0}] 208 72 -90
@@ -151,6 +151,8 @@ data modify block 201 9 -71 front_text.messages set value ['{"text":""}', '{"sco
 data modify block 204 9 -73 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"add_time"}}', '{"text":""}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 0}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={diff_chat = 1}] run data modify block 185 8 -81 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 185 8 -81 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @e[tag=timers, limit=1] counter
