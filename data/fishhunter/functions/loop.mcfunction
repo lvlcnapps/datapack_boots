@@ -1,7 +1,8 @@
 # работа глобального счетчика времени и ловля победы хантера по времени
-scoreboard players remove @a[tag=hunter, scores={counter=0..}] counter 1
-execute as @a[scores={counter=0}] run function fishhunter:hunter_win
+scoreboard players remove @e[tag=timers, scores={counter=0..}] counter 1
+execute as @e[tag=timers,scores={counter=0}] run function fishhunter:hunter_win
 
+# проверка открытых домов
 execute as @a[scores={check = 1..}] run function fishhunter:show_levers
 
 # работа класса танк
@@ -42,9 +43,9 @@ scoreboard players add @a[scores={fish_add = 1}] fishCount 1
 execute as @p[scores={fish_add = 1}] run function fishhunter:add_fish
 
 # цветной боссбар
-execute as @p[tag=hunter, scores={counter=..500}] run bossbar set minecraft:timer color red
-execute as @p[tag=hunter, scores={counter=500..1500}] run bossbar set minecraft:timer color yellow
-execute as @p[tag=hunter, scores={counter=1500..}] run bossbar set minecraft:timer color green
+execute as @e[tag=timers, scores={counter=..500}] run bossbar set minecraft:timer color red
+execute as @e[tag=timers, scores={counter=500..1500}] run bossbar set minecraft:timer color yellow
+execute as @e[tag=timers, scores={counter=1500..}] run bossbar set minecraft:timer color green
 
 # границы безопасности в церкви
 execute at @a[x=199, y=73, z=-98, dx=0,dy=2,dz=16, tag=hunter] run tp @a[x=199, y=73, z=-98, dx=0,dy=2,dz=16, tag=hunter] ~-1 ~ ~
@@ -54,6 +55,9 @@ execute at @a[x=200, y=73, z=-81, dx=16,dy=2,dz=0, tag=hunter] run tp @a[x=200, 
 # автореколл после окончания игры
 scoreboard players remove @a[tag=hunter, scores={cooldown=0..}] cooldown 1
 execute as @a[scores={cooldown=0}] run function fishhunter:refresh
+
+scoreboard players remove @e[tag=timers, scores={cooldown=0..}] cooldown 1
+execute as @e[tag=timers,scores={cooldown=0}] run function fishhunter:refresh
 
 # потеря рыбы из-за смерти ботиночка
 execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run clear @a[tag=!hunter, scores={deaths=1.., lost_fish = 0}] minecraft:pufferfish 1
@@ -112,8 +116,12 @@ execute as @a[scores={mode_boots=7}] at @s if entity @e[distance=..15, limit=1,t
 execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
 execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"","bold":true,"color":"green"}
 scoreboard players set @a tp_near 0
+
+# запретная зона для телепорта (центр церкви и верх церкви)
 execute if entity @e[tag=mark, x=199, y = 70, z=-111, dx = 18, dy = 50, dz=30] run title @a[scores={mode_boots = 7}] actionbar {"text":"ABORTED","bold":true,"color":"red"}
 kill @e[tag=mark, x=199, y = 70, z=-111, dx = 18, dy = 50, dz=30]
+execute if entity @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8] run title @a actionbar {"text":"ABORTED","bold":true,"color":"red"}
+kill @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8]
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 scoreboard players operation @a[tag=hunter, scores={mode_respawn = 0, deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
@@ -144,9 +152,8 @@ data modify block 204 9 -73 front_text.messages set value ['{"text":""}', '{"sco
 execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 0}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 
-
 # красивый таймер сверху
-execute store result bossbar minecraft:timer value run scoreboard players get @p[tag=hunter] counter
+execute store result bossbar minecraft:timer value run scoreboard players get @e[tag=timers, limit=1] counter
 
 # замена сломанных штанов и ботиночков
 item replace entity @a[scores={br_boots = 1..}] armor.feet with minecraft:netherite_boots

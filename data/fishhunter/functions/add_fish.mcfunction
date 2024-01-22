@@ -2,7 +2,7 @@
 scoreboard players set @a[tag=hunter] fish_add 0
 scoreboard players add @a fish_counter 1
 # добавление времени за принос рыбы, берется у курицы с тегом глобал
-scoreboard players operation @a[tag=hunter] counter += @e[tag=global, limit=1] add_time
+scoreboard players operation @e[tag=timers] counter += @e[tag=global, limit=1] add_time
 
 # настройки сообщений о рыбах
 execute as @p[scores={fish_counter = 1}] run say еще 4 рыбра
