@@ -124,6 +124,7 @@ execute if entity @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8
 kill @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8]
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
+execute as @a[tag=!hunter] at @a if entity @e[tag=global, scores={mode_respawn=0}] run spawnpoint @s ~ ~ ~
 execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players operation @a[tag=hunter, scores={deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:speed infinite 3 true
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50 true
