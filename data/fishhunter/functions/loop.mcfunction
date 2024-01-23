@@ -102,7 +102,7 @@ execute as @a[scores={stun_live = 0}] run title @a[scores={mode_boots = 6}] acti
 # работа класса телепорт
 execute as @a[scores={tp_spawn = 1..}] run kill @e[tag=mark]
 execute at @a[scores={tp_spawn = 1..}] run summon minecraft:item_frame ~ ~ ~ {Tags:["mark"], Rotation:[0.0f, -90.f], Facing:1b, Invisible: 1b, Item:{id: "minecraft:raw_gold_block", Count: 1b}}
-scoreboard players set @a[scores={tp_spawn = 1..}] tp_reload 100
+scoreboard players set @a[scores={tp_spawn = 1..}] tp_reload 1600
 scoreboard players set @a[scores={tp_spawn = 1..}] tp_spawn 0
 give @a[scores={tp_reload = 0}] minecraft:suspicious_stew 1
 scoreboard players remove @a[scores={tp_reload = 0..}] tp_reload 1
