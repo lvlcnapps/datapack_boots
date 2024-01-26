@@ -70,13 +70,26 @@ give @a[tag=!hunter, scores={tank_reload = 1..}] minecraft:enchanted_golden_appl
 scoreboard players set @a[tag=!hunter, scores={tank_reload = 1..}] tank_reload 0
 
 # работа класса радар
-execute store success score @a[tag=!hunter, level=1.., scores={mode_boots = 5}] is_radared run execute at @a[tag=!hunter, level=1.., scores={mode_boots = 5}] run effect give @a[tag=hunter, distance=..75] minecraft:glowing 3 1 true
-xp set @a[tag=!hunter, scores = {mode_boots = 5}, level=1..] 0 levels
-scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_reload 400
+# execute store success score @a[tag=!hunter, level=1.., scores={mode_boots = 5}] is_radared run execute at @a[tag=!hunter, level=1.., scores={mode_boots = 5}] run effect give @a[tag=hunter, distance=..75] minecraft:glowing 3 1 true
+# xp set @a[tag=!hunter, scores = {mode_boots = 5}, level=1..] 0 levels
+# scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_reload 400
+# scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_used 0
+# scoreboard players remove @a[scores={radar_reload = 0..}] radar_reload 1
+# give @a[scores={radar_reload = 0}] minecraft:experience_bottle 1
+# # effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
+# scoreboard players set @a is_radared -1
+
+# работа класса радар 2.0
+tellraw @a[scores={mode_boots = 5, radar_reload = 0.., radar_used = 1..}] ["",{"text":"До следующего использования радара: "},{"score":{"name":"@a[scores={mode_boots = 5, radar_reload = 0.., radar_used = 1..}]","objective":"radar_reload"}},{"text":" тиков"}]
+# tellraw @a[scores={mode_boots = 5, radar_reload = 0.., radar_used = 1..}] {"score":{"name":"@a[scores={mode_boots = 5, radar_reload = 0.., radar_used = 1..}]","objective":"radar_reload"}}
+execute store success score @a[tag=!hunter, scores={radar_used = 1.., mode_boots = 5, radar_reload = ..0}] is_radared run execute at @a[tag=!hunter, scores={radar_used = 1.., mode_boots = 5, radar_reload = ..0}] run effect give @a[tag=hunter, distance=..75] minecraft:glowing 10 1 true
+effect give @a[scores={is_radared = 1}] minecraft:glowing 2 1 true
+# tellraw @a[scores={is_radared = 0}] {"text":"Ниггер","color":"red"}
+title @a[scores={is_radared = 0}] actionbar {"text":"Nobody","color":"red"}
+scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1.., is_radared = 0}] radar_reload 1000
+scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1.., is_radared = 1}] radar_reload 600
 scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}] radar_used 0
 scoreboard players remove @a[scores={radar_reload = 0..}] radar_reload 1
-give @a[scores={radar_reload = 0}] minecraft:experience_bottle 1
-# effect give @a[scores={is_radared = 0}] minecraft:glowing 3 1 true
 scoreboard players set @a is_radared -1
 
 # работа класса стан

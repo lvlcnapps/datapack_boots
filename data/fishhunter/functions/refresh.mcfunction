@@ -15,6 +15,7 @@ scoreboard players set @e[tag=global] game 0
 scoreboard players set @a tank_relo 0
 scoreboard players set @a tank_live -1
 scoreboard players set @a tank_cd -1
+scoreboard players set @a radar_reload -1
 
 # чистка вещей, эффектов и тегов
 clear @a

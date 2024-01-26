@@ -39,7 +39,7 @@ effect give @a[tag=hunter] minecraft:strength infinite 50 true
 give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":false}]'},Enchantments:[{id:sharpness,lvl:100}]} 1
 give @a carrot_on_a_stick{display:{Name:'[{"text":"Датчик","italic":false}]'},RepairCost:1,Unbreakable:1b,Damage:1} 1
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
-give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:experience_bottle 1
+give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:warped_fungus_on_a_stick 1
 give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:ender_pearl 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
