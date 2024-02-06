@@ -5,6 +5,10 @@ execute as @e[tag=timers,scores={counter=0}] run function fishhunter:hunter_win
 # проверка открытых домов
 execute as @a[scores={check = 1..}] run function fishhunter:show_levers
 
+# выдача стрел для лука
+execute unless score @e[tag=global,limit=1,scores={bow_toggle = 1, arrow_giver = 0..}] arrow_giver matches 0 run give @a[tag=hunter] minecraft:arrow
+scoreboard players remove @e[tag=global, scores={arrow_giver = 1..}] arrow_giver 1
+
 # работа класса танк
 scoreboard players set @a[scores={mode_boots = 4, tank_relo = 1.., tank_live = ..-1}] tank_live 100
 scoreboard players remove @a[scores={tank_live = 0..}] tank_live 1
@@ -38,7 +42,7 @@ execute store success score @a[tag=hunter] fish_win run clear @a[tag=hunter] min
 execute as @p[tag=hunter, scores={fish_win = 1}] run function fishhunter:remove_fish
 
 # отслеживание рыб на месте сдачи
-execute store success score @a[tag=!hunter, x = 207, y = 74, z = -110, dx = 2, dy = 1, dz = 1] fish_add run clear @a[tag=!hunter, x = 207, y = 74, z = -110, dx = 2, dy = 1, dz = 1, scores={fish_add = 0}] minecraft:pufferfish 1
+execute store success score @a[gamemode=adventure, tag=!hunter, x = 207, y = 74, z = -110, dx = 2, dy = 1, dz = 1] fish_add run clear @a[gamemode=adventure, tag=!hunter, x = 207, y = 74, z = -110, dx = 2, dy = 1, dz = 1, scores={fish_add = 0}] minecraft:pufferfish 1
 scoreboard players add @a[scores={fish_add = 1}] fishCount 1
 execute as @p[scores={fish_add = 1}] run function fishhunter:add_fish
 
@@ -99,6 +103,7 @@ scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
 execute at @a[scores={stun_used = 1..}] run summon minecraft:piglin ~ ~ ~ {NoAI:1b,PersistenceRequired:0b,CanPickUpLoot:0b,Silent:1,Age:0,ArmorItems:[{id:"minecraft:netherite_boots",Count:1},{id:"minecraft:netherite_leggings",Count:1},{},{}],ActiveEffects:[{Id:14,Amplifier:0,Duration:2147483647,ShowParticles:0b}],Tags:["stun"]}
 scoreboard players set @a[scores={stun_used = 1..}] stun_cd 100
 scoreboard players set @a[scores={stun_used = 1..}] stun_live 600
+# data modify entity @e[tag=stun,limit=1] Rotation set from entity @a[limit=1, scores={stun_cd = 95..}] Rotation
 scoreboard players set @a[scores={stun_used = 1..}] stun_used 0
 execute as @a[scores={killed_fake = 1..}] run scoreboard players set @a[scores={stun_live = 0..}] stun_live -1
 effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:darkness 3 50 true
@@ -144,11 +149,11 @@ kill @e[tag=mark, x = 185, dx = 46, y = 77, dy = 3, z = -93, dz = 8]
 
 # поведение игры при чьй то смерти при выкл респавне и ловля победы хантера из-за смерти всех ботиночков
 execute as @a[tag=!hunter] at @a if entity @e[tag=global, scores={mode_respawn=0}] run spawnpoint @s ~ ~ ~
-execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players operation @a[tag=hunter, scores={deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
+execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players operation @a[tag=hunter, team=boots, scores={deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:speed infinite 3 true
 effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50 true
-execute as @a[tag=!hunter, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run scoreboard players remove @e[tag=timers] bootsCount 1
-execute as @a[tag=!hunter, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:spec
+execute as @a[tag=!hunter, team=boots, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run scoreboard players remove @e[tag=timers] bootsCount 1
+execute as @a[tag=!hunter, team=boots, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:spec
 execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players set @a[scores={deaths=1.., lost_fish = 0}] deaths 0
 execute as @e[tag=timers,scores={bootsCount=0}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:hunter_win
 
@@ -173,6 +178,10 @@ execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify bloc
 execute as @e[tag=global,limit=1,scores={class_toggle = 0}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={diff_chat = 1}] run data modify block 185 8 -74 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 185 8 -74 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+execute as @e[tag=global,scores={bow_toggle = 1}] run data modify block 187 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,scores={bow_toggle = 0}] run data modify block 187 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+data modify block 188 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Arrows:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"arrow_count"}}', '{"text":""}']
+
 
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @e[tag=timers, limit=1] counter

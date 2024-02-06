@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:piglin_head"
+        },
+        "title": "Expeditious Stalker",
+        "description": "Travel 1 hour while sneaking",
+        "background": "minecraft:textures/block/netherite_block.png",
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "fishhunter:hunter_gamer/sneak1",
+    "criteria": {
+        "travel_alot": {
+            "trigger": "minecraft:tick",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_scores",
+                        "entity": "this",
+                        "scores": {
+                            "sp": 72000
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "travel_alot"
+        ]
+    ],
+    "rewards": {
+        "function": "fishhunter:test"
+    }
+}
