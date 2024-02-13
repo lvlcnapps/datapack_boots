@@ -45,4 +45,5 @@ execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a 
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.4 with minecraft:clock{display:{Name:'[{"text":"Радар","italic":false, "color":"green"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.5 with minecraft:amethyst_shard{display:{Name:'[{"text":"Спецкласс Стан","italic":false, "color":"blue"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.6 with minecraft:blaze_powder{display:{Name:'[{"text":"Спецкласс Телепорт","italic":false, "color":"blue"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.7 with minecraft:diamond{display:{Name:'[{"text":"-не работает-","italic":false, "color":"red"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.7 with minecraft:music_disc_wait{display:{Name:'[{"text":"Спецкласс Наблюдатель","italic":false, "color":"blue"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.8 with minecraft:diamond{display:{Name:'[{"text":"-не работает-","italic":false, "color":"red"}]'}} 1
