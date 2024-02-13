@@ -18,6 +18,14 @@ scoreboard players set @a tank_cd -1
 scoreboard players set @a radar_reload -1
 scoreboard players set @a stun_reload -1
 scoreboard players set @a tp_reload -1
+scoreboard players set @a cam_cd -1
+scoreboard players set @a cam_change 0
+scoreboard players set @a cam_destroy 0
+scoreboard players set @a cam_mode 0
+scoreboard players set @a cam_reload 0
+scoreboard players set @a cam_timer 0
+scoreboard players set @a cam_use 0
+scoreboard players set @a cam_work 1
 
 # чистка вещей, эффектов и тегов
 clear @a

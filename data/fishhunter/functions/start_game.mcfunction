@@ -31,7 +31,7 @@ gamemode adventure @a
 item replace entity @a armor.feet with minecraft:netherite_boots
 item replace entity @a[scores={mode_boots = ..0}] armor.legs with minecraft:netherite_leggings
 item replace entity @a[scores={mode_boots = 3..}] armor.legs with minecraft:netherite_leggings
-item replace entity @a[scores={mode_boots = 2..}] armor.legs with minecraft:netherite_leggings{display:{Name:'[{"text":"SPEEEEEED","italic":false}]'},Enchantments:[{id:swift_sneak,lvl:255}]}
+item replace entity @a[scores={mode_boots = 2}] armor.legs with minecraft:netherite_leggings{display:{Name:'[{"text":"SPEEEEEED","italic":false}]'},Enchantments:[{id:swift_sneak,lvl:255}]}
 item replace entity @a[tag=hunter] armor.legs with minecraft:netherite_leggings
 item replace entity @a[tag=hunter] armor.chest with minecraft:netherite_chestplate
 item replace entity @a[tag=hunter] armor.head with minecraft:wither_skeleton_skull
@@ -47,6 +47,8 @@ give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:warped_fungus_on_a_stick
 give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:ender_pearl 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
+give @p[tag=!hunter, scores={mode_boots = 8}] minecraft:warped_fungus_on_a_stick 1
+give @p[tag=!hunter, scores={mode_boots = 8}] minecraft:ender_eye 1
 execute as @e[tag=global, scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
 
 # тп на нужные места - ботиночки в церковь, хантеры в хаб

@@ -28,7 +28,8 @@ scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:heart_of_the_sea"}}]
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:clock"}}] mode_boots 5
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:amethyst_shard"}}] mode_boots 6
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:blaze_powder"}}] mode_boots 7
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 8
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:music_disc_wait"}}] mode_boots 8
+scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 9
 
 # убирать плохолежащие рыбы
 execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age: 50s}] run function fishhunter:remove_fish
@@ -96,6 +97,36 @@ scoreboard players set @a[tag=!hunter, scores={mode_boots = 5, radar_used = 1..}
 scoreboard players remove @a[scores={radar_reload = 0..}] radar_reload 1
 scoreboard players set @a is_radared -1
 
+# работа класса камера
+scoreboard players remove @a[scores={mode_boots = 8, cam_timer = 1..}] cam_timer 1
+execute as @a[scores={mode_boots = 8, cam_timer = 1}] run function fishhunter:cam_tp
+
+kill @e[type=minecraft:eye_of_ender]
+scoreboard players set @a[scores={mode_boots = 8, cam_use=1..}] cam_cd 300
+execute at @a[scores={mode_boots = 8,cam_work = 1, cam_timer = 0, cam_use = 1..}] run summon minecraft:armor_stand ~ ~ ~ {Tags:["stander"],ArmorItems:[{id:"minecraft:netherite_boots",Count:1},{id:"minecraft:netherite_leggings",Count:1},{},{}]}
+data modify entity @e[limit=1, tag=stander] Rotation[0] set from entity @a[limit=1, scores={mode_boots = 8,cam_timer = 0, cam_work = 1,}] Rotation[0]
+gamemode spectator @a[scores={mode_boots = 8,cam_work = 1,cam_use = 1..}]
+spectate @e[limit=1, tag=camera] @a[limit=1, scores={mode_boots = 8,cam_work = 1,cam_use = 1..}]
+scoreboard players set @a[scores={mode_boots = 8,cam_work = 1,cam_timer = 0, cam_use = 1..}] cam_timer 100
+scoreboard players set @a[scores={mode_boots = 8,cam_work = 0}] cam_use 0
+give @a[scores={mode_boots = 8,cam_cd = 0}] minecraft:ender_eye 1
+scoreboard players remove @a[scores={mode_boots = 8,cam_cd = 0..}] cam_cd 1
+title @a[scores={mode_boots=8, cam_work = 0}] actionbar {"text":"Camera Broken","color":"red"}
+
+execute as @a[scores={mode_boots = 8,cam_change = 1..}] unless entity @e[tag=camera] run summon minecraft:armor_stand ~ ~ ~ {Tags:["camera"]}
+scoreboard players operation @a[scores={mode_boots = 8,cam_change = 1..}] cam_mode *= hhuy cam_mode
+scoreboard players operation @a[scores={mode_boots = 8,cam_change = 1..}] cam_mode -= hhuy cam_mode
+scoreboard players set @a[scores={mode_boots = 8,cam_change = 1..}] cam_work 1
+execute if entity @a[scores={mode_boots = 8,cam_change = 1..}] run item replace entity @e[tag=camera] armor.head with minecraft:player_head{SkullOwner:Edna_I} 1
+scoreboard players set @a[scores={mode_boots = 8,cam_change = 1..}] cam_change 0
+
+data modify entity @e[tag=camera, limit=1] Rotation[0] set from entity @a[limit=1, scores={mode_boots = 8,cam_mode = 1}] Rotation[0]
+execute at @a[limit=1, scores={mode_boots = 8,cam_mode = 1}] run tp @e[tag=camera, limit=1] ^1 ^1 ^2
+
+execute store success score @a[tag=hunter] cam_destroy run clear @a[tag=hunter] minecraft:player_head{SkullOwner: {Id: [I; -1603909985, 514476567, -1545101897, -736314301], Properties: {textures: [{Value: "ewogICJ0aW1lc3RhbXAiIDogMTcwNzc1NDI0ODUzMywKICAicHJvZmlsZUlkIiA6ICJhMDY2NDY5ZjFlYWE0YTE3YTNlNzlkYjdkNDFjYmM0MyIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZG5hX0kiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhMWNkYzU0ZGI1NDViN2MwNzM0ZTNhOTI0Nzc2ZThiZDA1OTFiZDVkM2JiNzVkMzk5Zjg0YmEyOTE4ZDkzMSIKICAgIH0KICB9Cn0=", Signature: "nhUwUe2FcU8vQQ7qIYoJzXUKgMul2V4grDgbRIDIVyhpbvNXX4tYsRed2SjhbAVKOUyrJmq18bpOPR71ZDaJ+69iU8A2bZLYyTZt2bFjrPYmz0AkaLEo1o5IaynO8JiHGgwA5sXwYUZmW3Poqb3DOhBTClaU/StcV+er1T7OlAQmgTPNKTCqlzNM2U1PRBENIZwdGMTskO+H5YrT8WU1mjk9hjGknyXeBlcS/4p51NNkYGYa/qUqS7xYqRUFZwkyOi9I2YKulZbPN6LFWbGQTXtD5HhtyXg+mkWzMtF+4lnuOBArMgLq3r8P9zZeLgzWSYjF5wfkFo1nFun7QCLnUA0O979JQrvkq4pzD/Y+ee1fNEwwJ8nB+CO5NDFyz62CuK7/LJKrS8K4Z6kxOc+72LXShqLt3vjXrMy2YbGqfGD22bfVSi3kLR7a1PVyncx+pIZTXy8vpGw/MKYKVsTUSajexg32QGfpc2YpLq6xXweeWvenIhi6Pukoed5NDMft0alDfQZdg9KLPQiViZ4I23z8v3YINdC4ilF827CGwEuPLPJvQZTi8n/i6Fm+TiyTy5EyTLN8eqdqUpLX1d47u3VIQbebfVOf/t6O24eKuQHPVDvd2pkg0kShQ4Hu2lPhsxV7+ohnxaJJmisqhMpJz6LwCIzd/miu6PRgnlEc3DM="}, {Value: "ewogICJ0aW1lc3RhbXAiIDogMTcwNzc1NDI0ODUzMywKICAicHJvZmlsZUlkIiA6ICJhMDY2NDY5ZjFlYWE0YTE3YTNlNzlkYjdkNDFjYmM0MyIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZG5hX0kiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhMWNkYzU0ZGI1NDViN2MwNzM0ZTNhOTI0Nzc2ZThiZDA1OTFiZDVkM2JiNzVkMzk5Zjg0YmEyOTE4ZDkzMSIKICAgIH0KICB9Cn0=", Signature: "nhUwUe2FcU8vQQ7qIYoJzXUKgMul2V4grDgbRIDIVyhpbvNXX4tYsRed2SjhbAVKOUyrJmq18bpOPR71ZDaJ+69iU8A2bZLYyTZt2bFjrPYmz0AkaLEo1o5IaynO8JiHGgwA5sXwYUZmW3Poqb3DOhBTClaU/StcV+er1T7OlAQmgTPNKTCqlzNM2U1PRBENIZwdGMTskO+H5YrT8WU1mjk9hjGknyXeBlcS/4p51NNkYGYa/qUqS7xYqRUFZwkyOi9I2YKulZbPN6LFWbGQTXtD5HhtyXg+mkWzMtF+4lnuOBArMgLq3r8P9zZeLgzWSYjF5wfkFo1nFun7QCLnUA0O979JQrvkq4pzD/Y+ee1fNEwwJ8nB+CO5NDFyz62CuK7/LJKrS8K4Z6kxOc+72LXShqLt3vjXrMy2YbGqfGD22bfVSi3kLR7a1PVyncx+pIZTXy8vpGw/MKYKVsTUSajexg32QGfpc2YpLq6xXweeWvenIhi6Pukoed5NDMft0alDfQZdg9KLPQiViZ4I23z8v3YINdC4ilF827CGwEuPLPJvQZTi8n/i6Fm+TiyTy5EyTLN8eqdqUpLX1d47u3VIQbebfVOf/t6O24eKuQHPVDvd2pkg0kShQ4Hu2lPhsxV7+ohnxaJJmisqhMpJz6LwCIzd/miu6PRgnlEc3DM="}, {Value: "ewogICJ0aW1lc3RhbXAiIDogMTcwNzc1NDI0ODUzMywKICAicHJvZmlsZUlkIiA6ICJhMDY2NDY5ZjFlYWE0YTE3YTNlNzlkYjdkNDFjYmM0MyIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZG5hX0kiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhMWNkYzU0ZGI1NDViN2MwNzM0ZTNhOTI0Nzc2ZThiZDA1OTFiZDVkM2JiNzVkMzk5Zjg0YmEyOTE4ZDkzMSIKICAgIH0KICB9Cn0=", Signature: "nhUwUe2FcU8vQQ7qIYoJzXUKgMul2V4grDgbRIDIVyhpbvNXX4tYsRed2SjhbAVKOUyrJmq18bpOPR71ZDaJ+69iU8A2bZLYyTZt2bFjrPYmz0AkaLEo1o5IaynO8JiHGgwA5sXwYUZmW3Poqb3DOhBTClaU/StcV+er1T7OlAQmgTPNKTCqlzNM2U1PRBENIZwdGMTskO+H5YrT8WU1mjk9hjGknyXeBlcS/4p51NNkYGYa/qUqS7xYqRUFZwkyOi9I2YKulZbPN6LFWbGQTXtD5HhtyXg+mkWzMtF+4lnuOBArMgLq3r8P9zZeLgzWSYjF5wfkFo1nFun7QCLnUA0O979JQrvkq4pzD/Y+ee1fNEwwJ8nB+CO5NDFyz62CuK7/LJKrS8K4Z6kxOc+72LXShqLt3vjXrMy2YbGqfGD22bfVSi3kLR7a1PVyncx+pIZTXy8vpGw/MKYKVsTUSajexg32QGfpc2YpLq6xXweeWvenIhi6Pukoed5NDMft0alDfQZdg9KLPQiViZ4I23z8v3YINdC4ilF827CGwEuPLPJvQZTi8n/i6Fm+TiyTy5EyTLN8eqdqUpLX1d47u3VIQbebfVOf/t6O24eKuQHPVDvd2pkg0kShQ4Hu2lPhsxV7+ohnxaJJmisqhMpJz6LwCIzd/miu6PRgnlEc3DM="}, {Value: "ewogICJ0aW1lc3RhbXAiIDogMTcwNzc3MzUxMTg5NSwKICAicHJvZmlsZUlkIiA6ICJhMDY2NDY5ZjFlYWE0YTE3YTNlNzlkYjdkNDFjYmM0MyIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZG5hX0kiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhMWNkYzU0ZGI1NDViN2MwNzM0ZTNhOTI0Nzc2ZThiZDA1OTFiZDVkM2JiNzVkMzk5Zjg0YmEyOTE4ZDkzMSIKICAgIH0KICB9Cn0=", Signature: "EDF744f1wtiDF5M4CJwN2loydc1qUM4s0Q86MMPK72QBH5ltJ3Mobay4KDs6UjfvzGSqpPBGHE+jEXK8jXxHpbmx2zXgbwWOgeiobRtumMZvakX7q1hosRGxgefUiHqNqiK7GkYWnge0mKgGnn+zCPXaQJ6clH9y3fmnYHO3HL/WtUrhNx8c7SRzOvquWj30hllblWvA6C+jVRFRY4It1S9YVoek82Iq/X+9EYsUvgeWo1WhaFnmht4g6IgqqUnLwZuxSwa0RgyuEAnR2Pjtu65fBRgd6wb/+oSZEH2/f66hZdigMJ7TKCXYkFkyvU5KCK29u0LmHcMB7uw3WxCgrNE9yvwVX+b4Uq4WDcgUQozY9nwOcz4ZRu1uLH8q2Pj6nAbmMbxojGUBHlmdkFrjkX9SzYtzXsUiSgBPG6wkZDbhyCTqqeS8qHX6cdjgtFp0h4cJ4YvrTZTd83+cu6iJt04oZlA8T8Nq6DvXimp3FtMNnG7vAPiMair8CG/KjfjnFE+L4eNKLhKUDFlbsWYIeHlAWwB7c+HWoVh72e2s01aCUFyUCx9Of3WpuAO9TzFp+eecKYQSQcMjAaLis8Ik3E5LFahoBqq4+PX6b+j9mU6E0aqGwPHdiOZdQlDQ8dXtu+j4pATt2YQHDdSYzIPkMNuzbQSrUXuPr6+/xjXCYS8="}]}, Name: "Edna_I"}}
+execute if entity @a[tag=hunter, scores={cam_destroy = 1}] run scoreboard players set @a cam_work 0
+scoreboard players set @a[scores={cam_destroy = 1}] cam_destroy 0
+
 # работа класса стан
 execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
 execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
@@ -116,6 +147,8 @@ scoreboard players remove @a[scores={stun_live = 0..}] stun_live 1
 give @a[scores={stun_cd = 0}] minecraft:snowball 1
 execute as @a[scores={stun_live = 0}] run kill @e[tag=stun]
 execute as @a[scores={stun_live = 0}] run title @a[scores={mode_boots = 6}] actionbar {"text":"Destroyed","bold":true,"color":"blue"}
+
+
 
 # работа класса телепорт
 execute as @a store result score @s place_y run data get entity @s Pos[1] 10
