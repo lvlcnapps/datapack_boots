@@ -68,6 +68,11 @@ execute as @e[tag=timers,scores={cooldown=0}] run function fishhunter:refresh
 execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run clear @a[tag=!hunter, scores={deaths=1.., lost_fish = 0}] minecraft:pufferfish 1
 execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
 
+# запрет стрелять в церкви
+kill @e[type=minecraft:arrow, x = 217, y = 72, z = -81, dx = 12, dy = 9, dz = -18]
+kill @e[type=minecraft:arrow, x = 217, y = 72, z = -81, dx = -18, dy = 9, dz = 28]
+kill @e[type=minecraft:arrow, x = 199, y = 72, z = -81, dx = -12, dy = 9, dz = -18]
+
 # эффекты классов
 execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 2}] minecraft:speed infinite 0 true
 execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 3}] minecraft:jump_boost infinite 1 true
