@@ -1,4 +1,6 @@
+# исправлено под счетчик 2.0
 scoreboard players set @e[tag=global] winner 0
+scoreboard players set @e[tag=global] tt1 0
 
 function fishhunter:logging
 

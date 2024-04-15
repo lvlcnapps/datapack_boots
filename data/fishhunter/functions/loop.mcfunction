@@ -31,18 +31,21 @@ scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:blaze_powder"}}] mod
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:music_disc_wait"}}] mode_boots 8
 scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 9
 
-# убирать плохолежащие рыбы
+# убирать плохолежащие рыбы # исправлено под счетчик 2.0
 execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age: 50s}] run function fishhunter:remove_fish
 
-# ловля победы хантера проёбом рыб
-scoreboard players operation @p[tag=hunter] fish < @e[tag=global, limit=1] lost_fish
-execute as @p[tag=hunter, scores={fish=0}] run function fishhunter:hunter_win
+# ловля победы хантера проёбом рыб # исправлено под счетчик 2.0
+# scoreboard players operation @p[tag=hunter] fish < @e[tag=global, limit=1] lost_fish
+# execute as @p[tag=hunter, scores={fish=0}] run function fishhunter:hunter_win
+execute store result score @e[tag=global] tt3 run scoreboard players operation @e[tag=global] tt1 < @e[tag=global] tt2
+scoreboard players operation @e[tag=global] tt3 -= @e[tag=global] tt2
+execute if entity @e[tag=global,scores={tt3 = 0}] run function fishhunter:hunter_win
 
-# отбирание рыбы хантером
+# отбирание рыбы хантером # исправлено под счетчик 2.0
 execute store success score @a[tag=hunter] fish_win run clear @a[tag=hunter] minecraft:pufferfish
 execute as @p[tag=hunter, scores={fish_win = 1}] run function fishhunter:remove_fish
 
-# отслеживание рыб на месте сдачи
+# отслеживание рыб на месте сдачи # исправлено под счетчик 2.0
 execute store success score @a[gamemode=adventure, tag=!hunter, x = 207, y = 74, z = -110, dx = 2, dy = 1, dz = 1] fish_add run clear @a[gamemode=adventure, tag=!hunter, x = 207, y = 74, z = -110, dx = 2, dy = 1, dz = 1, scores={fish_add = 0}] minecraft:pufferfish 1
 scoreboard players add @a[scores={fish_add = 1}] fishCount 1
 execute as @p[scores={fish_add = 1}] run function fishhunter:add_fish
@@ -64,7 +67,7 @@ execute as @a[scores={cooldown=0}] run function fishhunter:refresh
 scoreboard players remove @e[tag=timers, scores={cooldown=0..}] cooldown 1
 execute as @e[tag=timers,scores={cooldown=0}] run function fishhunter:refresh
 
-# потеря рыбы из-за смерти ботиночка
+# потеря рыбы из-за смерти ботиночка # исправлено под счетчик 2.0
 execute store success score @a[tag=!hunter, scores={deaths=1..}] lost_fish run clear @a[tag=!hunter, scores={deaths=1.., lost_fish = 0}] minecraft:pufferfish 1
 execute as @p[tag=!hunter, scores={lost_fish = 1}] run function fishhunter:remove_fish
 
@@ -109,7 +112,7 @@ execute as @a[scores={mode_boots = 8, cam_timer = 1}] run function fishhunter:ca
 kill @e[type=minecraft:eye_of_ender]
 scoreboard players set @a[scores={mode_boots = 8, cam_use=1.., cam_mode=1}] cam_cd 0
 scoreboard players set @a[scores={mode_boots = 8, cam_use=1.., cam_mode=1}] cam_use 0
-scoreboard players set @a[scores={mode_boots = 8, cam_use=1.., cam_mode=0}] cam_cd 300
+scoreboard players set @a[scores={mode_boots = 8, cam_use=1.., cam_mode=0}] cam_cd 50
 execute at @a[scores={mode_boots = 8,cam_work = 1, cam_timer = 0, cam_use = 1..,cam_mode=0}] run summon minecraft:armor_stand ~ ~ ~ {Tags:["stander"],ArmorItems:[{id:"minecraft:netherite_boots",Count:1},{id:"minecraft:netherite_leggings",Count:1},{},{}]}
 data modify entity @e[limit=1, tag=stander] Rotation[0] set from entity @a[limit=1, scores={mode_boots = 8,cam_timer = 0, cam_work = 1,}] Rotation[0]
 gamemode spectator @a[scores={mode_boots = 8,cam_work = 1,cam_use = 1..,cam_mode=0}]
@@ -225,7 +228,7 @@ execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 1
 execute as @e[tag=global,scores={bow_toggle = 1}] run data modify block 187 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
 execute as @e[tag=global,scores={bow_toggle = 0}] run data modify block 187 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
 data modify block 188 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Arrows:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"arrow_count"}}', '{"text":""}']
-
+data modify block 185 14 -74 front_text.messages set value ['{"text":""}', '{"text":"Fishes:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"tt0"}}', '{"text":""}']
 
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @e[tag=timers, limit=1] counter

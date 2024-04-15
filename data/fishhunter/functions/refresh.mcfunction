@@ -26,6 +26,8 @@ scoreboard players set @a cam_reload 0
 scoreboard players set @a cam_timer 0
 scoreboard players set @a cam_use 0
 scoreboard players set @a cam_work 1
+scoreboard players set @e[tag=global] tt1 0
+scoreboard players operation @e[tag=global] tt4 = @e[tag=global] tt0
 
 # чистка вещей, эффектов и тегов
 clear @a
@@ -36,13 +38,14 @@ bossbar set minecraft:timer players dgdg
 # тп на нужное место с параметром
 tp @a 195 0 -100
 gamemode adventure @a
+team join Lobby @a
 
 # выдача предметов выбора класса
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.0 with minecraft:lapis_lazuli{display:{Name:'[{"text":"Полуинвиз","italic":false, "color":"green"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.1 with minecraft:feather{display:{Name:'[{"text":"Скорость","italic":false, "color":"green"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.2 with minecraft:rabbit_foot{display:{Name:'[{"text":"Прыгун","italic":false, "color":"green"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.3 with minecraft:heart_of_the_sea{display:{Name:'[{"text":"Танк","italic":false, "color":"green"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.4 with minecraft:clock{display:{Name:'[{"text":"Радар","italic":false, "color":"green"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.4 with minecraft:clock{display:{Name:'[{"text":"Спецкласс Радар","italic":false, "color":"blue"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.5 with minecraft:amethyst_shard{display:{Name:'[{"text":"Спецкласс Стан","italic":false, "color":"blue"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.6 with minecraft:blaze_powder{display:{Name:'[{"text":"Спецкласс Телепорт","italic":false, "color":"blue"}]'}} 1
 execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.7 with minecraft:music_disc_wait{display:{Name:'[{"text":"Спецкласс Наблюдатель","italic":false, "color":"blue"}]'}} 1

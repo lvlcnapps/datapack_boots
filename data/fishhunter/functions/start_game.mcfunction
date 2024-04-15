@@ -2,9 +2,13 @@ say start
 
 # очистка стоек в борделе
 kill @e[type=minecraft:armor_stand, x = 123, dx = 15, y = 73, dy = 10, z = -96, dz = 11]
+kill @e[type=minecraft:block_display, x=233, y=77, z=-37]
 
 # обновление карты
 function fishhunter:update_map
+
+scoreboard players set @e[tag=global] tt1 0
+scoreboard players operation @e[tag=global] tt4 = @e[tag=global] tt0
 
 spawnpoint @a 207 52 -99
 
@@ -43,7 +47,7 @@ execute if entity @e[tag=global, scores={bow_toggle = 1}] run give @a[tag=hunter
 execute if entity @e[tag=global, scores={arrow_count = 1..}] run 
 give @a carrot_on_a_stick{display:{Name:'[{"text":"Датчик","italic":false}]'},RepairCost:1,Unbreakable:1b,Damage:1} 1
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
-give @a[tag=!hunter, scores={mode_boots = 5}] minecraft:warped_fungus_on_a_stick 1
+give @p[tag=!hunter, scores={mode_boots = 5}] minecraft:warped_fungus_on_a_stick 1
 give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:ender_pearl 1
 give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
@@ -55,7 +59,10 @@ execute as @e[tag=global, scores={mode_respawn = 0}] run fill 205 52 -90 203 54 
 tp @a[tag=!hunter] 208 72 -90
 tp @a[tag=hunter] 204 52 -89
 
+title @a[tag=!hunter] title ["",{"text":"\u041d\u0443\u0436\u043d\u043e ","color":"aqua"},{"score":{"name":"@e[tag=global]","objective":"tt0"},"color":"aqua"},{"text":" \u0440\u044b\u0431","color":"aqua"}]
+
 execute as @e[tag=global, scores={mode_respawn = 0}] run schedule function fishhunter:let_hunter_go 10s replace
+scoreboard players add @e[limit=1, tag=global] games_counter 1
 
 # подгрузка значения рыб и настройка счетчиков
 execute store result score @a fish run scoreboard players get @e[tag=global, limit=1] fish
