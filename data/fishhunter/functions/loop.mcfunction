@@ -240,6 +240,26 @@ scoreboard players set @a[scores={br_boots = 1..}] br_boots 0
 item replace entity @a[scores={br_legs = 1..}] armor.legs with minecraft:netherite_leggings
 scoreboard players set @a[scores={br_legs = 1..}] br_legs 0
 
+# открытие сундука, если из него забрали рыбу
+execute unless data block 218 71 -136 Items[0] run data merge block 218 71 -136 {Lock:""}
+execute unless data block 124 83 -91 Items[0] run data merge block 124 83 -91 {Lock:""}
+execute unless data block 148 80 -46 Items[0] run data merge block 148 80 -46 {Lock:""}
+execute unless data block 154 78 -5 Items[0] run data merge block 154 78 -5 {Lock:""}
+execute unless data block 237 82 -26 Items[0] run data merge block 237 82 -26 {Lock:""}
+execute unless data block 241 81 -53 Items[0] run data merge block 241 81 -53 {Lock:""}
+execute unless data block 264 78 -89 Items[0] run data merge block 264 78 -89 {Lock:""}
+execute unless data block 272 83 -109 Items[0] run data merge block 272 83 -109 {Lock:""}
+execute unless data block 173 75 -132 Items[0] run data merge block 173 75 -132 {Lock:""}
+# кладбище
+# тортики
+# барби
+# лягуха
+# таверна
+# гостиница
+# уву
+# ойвей
+# бомжи
+
 # костыль
 effect give @a[scores={totem_used = 1..}] minecraft:invisibility infinite 1 true
 scoreboard players set @a totem_used 0

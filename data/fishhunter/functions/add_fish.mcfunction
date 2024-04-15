@@ -5,17 +5,6 @@ scoreboard players remove @e[tag=global] tt4 1
 # добавление времени за принос рыбы, берется у курицы с тегом глобал
 scoreboard players operation @e[tag=timers] counter += @e[tag=global, limit=1] add_time
 
-# настройки сообщений о рыбах
-# execute as @e[tag=global,scores={tt4 = 8}] run say еще 8 рыбри
-# execute as @e[tag=global,scores={tt4 = 7}] run say еще 7 рыбов
-# execute as @e[tag=global,scores={tt4 = 6}] run say еще 6 рыбув
-# execute as @e[tag=global,scores={tt4 = 5}] run say еще 5 рыбер
-# execute as @e[tag=global,scores={tt4 = 4}] run say еще 4 рыбра
-# execute as @e[tag=global,scores={tt4 = 3}] run say еще 3 рыбив
-# execute as @e[tag=global,scores={tt4 = 2}] run say еще 2 рыбао
-# execute as @e[tag=global,scores={tt4 = 1}] run say еще 1 рыбим
-# execute as @e[tag=global,scores={tt4 = 0}] run function fishhunter:boots_win
-
 execute if entity @e[tag=global,scores={tt4 = 8}] positioned 208 74 -109 as @p[team=boots] run say еще 8 рыбри
 execute if entity @e[tag=global,scores={tt4 = 7}] positioned 208 74 -109 as @p[team=boots] run say еще 7 рыбов
 execute if entity @e[tag=global,scores={tt4 = 6}] positioned 208 74 -109 as @p[team=boots] run say еще 6 рыбув
@@ -25,7 +14,3 @@ execute if entity @e[tag=global,scores={tt4 = 3}] positioned 208 74 -109 as @p[t
 execute if entity @e[tag=global,scores={tt4 = 2}] positioned 208 74 -109 as @p[team=boots] run say еще 2 рыбао
 execute if entity @e[tag=global,scores={tt4 = 1}] positioned 208 74 -109 as @p[team=boots] run say еще 1 рыбим
 execute if entity @e[tag=global,scores={tt4 = 0}] positioned 208 74 -109 as @p[team=boots] run function fishhunter:boots_win
-
-# execute if entity @e[tag=global,scores={tt4 = 8}] positioned 208 74 -109 as @p[team=boots] run say lol
-# FIX 
-# maybe this can help with [global] bug

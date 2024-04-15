@@ -5,7 +5,8 @@ scoreboard players operation @e[tag=global, scores={tt4 = 0}] tt4 = @e[tag=globa
 function fishhunter:logging
 
 # текст
-tellraw @a "рыбы мои рыбы"
+# tellraw @a "рыбы мои рыбы"
+say рыбы мои рыбы
 
 # вернуть рыб в изначальное положение, чтобы игра не выдавала вечно победу хантеру
 execute store result score @a fish run scoreboard players get @e[tag=global, limit=1] fish

@@ -54,6 +54,7 @@ give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
 give @p[tag=!hunter, scores={mode_boots = 8}] minecraft:warped_fungus_on_a_stick 1
 give @p[tag=!hunter, scores={mode_boots = 8}] minecraft:ender_eye 1
 execute as @e[tag=global, scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
+give @a[tag=!hunter] tripwire_hook{display:{Name:'{"text":"Chest Key","color":"dark_red","bold":true,"italic":false}'}} 1
 
 # тп на нужные места - ботиночки в церковь, хантеры в хаб
 tp @a[tag=!hunter] 208 72 -90
@@ -76,3 +77,5 @@ team join hunter @a[tag=hunter]
 team join boots @a[tag=!hunter]
 
 execute store result score @e[tag=global] bootsCount run scoreboard players get @e[tag=timers, limit=1] bootsCount
+
+# execute store result entity 51eb35c5-41c9-429c-a58f-0b485f95f0f5 Pos[0] double 1 run data get entity LvLLCn LastDeathLocation.pos[0] 1
