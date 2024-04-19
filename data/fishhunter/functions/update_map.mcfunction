@@ -22,6 +22,7 @@ scoreboard players set @e[tag=levers] barbie 0
 scoreboard players set @e[tag=levers] elves 0
 scoreboard players set @e[tag=levers] frog 0
 scoreboard players set @e[tag=levers] bomj 0
+scoreboard players set @e[tag=levers] guests 0
 
 # через некоторое время удалить все выпавшие рамки и т п
 schedule function fishhunter:delete_shit 5s replace
