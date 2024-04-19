@@ -39,7 +39,7 @@ execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age:
 # execute as @p[tag=hunter, scores={fish=0}] run function fishhunter:hunter_win
 execute store result score @e[tag=global] tt3 run scoreboard players operation @e[tag=global] tt1 < @e[tag=global] tt2
 scoreboard players operation @e[tag=global] tt3 -= @e[tag=global] tt2
-execute if entity @e[tag=global,scores={tt3 = 0}] run function fishhunter:hunter_win
+execute if entity @e[tag=global,scores={tt3 = 0}] run function fishhunter:hunter_win_lost
 
 # отбирание рыбы хантером # исправлено под счетчик 2.0
 execute store success score @a[tag=hunter] fish_win run clear @a[tag=hunter] minecraft:pufferfish
