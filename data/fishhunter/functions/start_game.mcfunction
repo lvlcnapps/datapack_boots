@@ -29,23 +29,22 @@ scoreboard players set @e[tag=timers] bootsCount -1
 execute as @a[tag=!hunter] run scoreboard players add @e[tag=timers] bootsCount 1
 scoreboard players add @e[tag=timers] bootsCount 1
 
-# выдача амуниции и эффектов всем подряд
+# # выдача амуниции и эффектов всем подряд
 effect give @a minecraft:invisibility infinite 1 true
 gamemode adventure @a
 item replace entity @a armor.feet with minecraft:netherite_boots
 item replace entity @a[scores={mode_boots = ..0}] armor.legs with minecraft:netherite_leggings
 item replace entity @a[scores={mode_boots = 3..}] armor.legs with minecraft:netherite_leggings
-item replace entity @a[scores={mode_boots = 2}] armor.legs with minecraft:netherite_leggings{display:{Name:'[{"text":"SPEEEEEED","italic":false}]'},Enchantments:[{id:swift_sneak,lvl:255}]}
+item replace entity @a[scores={mode_boots = 2}] armor.legs with minecraft:netherite_leggings[minecraft:custom_name='[{"text":"SPEEEEEED","italic":false}]',minecraft:enchantments={levels: {"swift_sneak": 255}}]
 item replace entity @a[tag=hunter] armor.legs with minecraft:netherite_leggings
 item replace entity @a[tag=hunter] armor.chest with minecraft:netherite_chestplate
 item replace entity @a[tag=hunter] armor.head with minecraft:wither_skeleton_skull
-execute as @a[tag=hunter] run function fishhunter:make_skin
+# execute as @a[tag=hunter] run function fishhunter:make_skin
 effect give @a[tag=hunter] minecraft:speed infinite 3 true
 effect give @a[tag=hunter] minecraft:strength infinite 50 true
-give @a[tag=hunter] netherite_sword{display:{Name:'[{"text":"Мечъ","italic":false}]'},Enchantments:[{id:sharpness,lvl:100}]} 1
-execute if entity @e[tag=global, scores={bow_toggle = 1}] run give @a[tag=hunter] minecraft:bow{display:{Name:'[{"text":"Калаш","italic":false}]'},Enchantments:[{id:power,lvl:255}]} 1
-execute if entity @e[tag=global, scores={arrow_count = 1..}] run 
-give @a carrot_on_a_stick{display:{Name:'[{"text":"Датчик","italic":false}]'},RepairCost:1,Unbreakable:1b,Damage:1} 1
+give @a[tag=hunter] netherite_sword[minecraft:custom_name='[{"text":"Мечъ","italic":false}]',minecraft:enchantments={levels: {"sharpness": 255}}] 1
+execute if entity @e[tag=global, scores={bow_toggle = 1}] run give @a[tag=hunter] minecraft:bow[minecraft:custom_name='[{"text":"Калаш","italic":false}]', minecraft:enchantments={levels: {"power": 255}}] 1
+give @a carrot_on_a_stick[minecraft:custom_name='[{"text":"Датчик","italic":false}]', minecraft:custom_data={RepairCost:1,Unbreakable:1b,Damage:1}] 1
 give @a[tag=!hunter, scores={mode_boots = 4}] minecraft:honey_bottle 1
 give @p[tag=!hunter, scores={mode_boots = 5}] minecraft:warped_fungus_on_a_stick 1
 give @p[tag=!hunter, scores={mode_boots = 6}] minecraft:snowball 1
@@ -54,7 +53,7 @@ give @p[tag=!hunter, scores={mode_boots = 7}] minecraft:suspicious_stew 1
 give @p[tag=!hunter, scores={mode_boots = 8}] minecraft:warped_fungus_on_a_stick 1
 give @p[tag=!hunter, scores={mode_boots = 8}] minecraft:ender_eye 1
 execute as @e[tag=global, scores={mode_respawn = 0}] run fill 205 52 -90 203 54 -88 glass
-give @a[tag=!hunter] tripwire_hook{display:{Name:'{"text":"Chest Key","color":"dark_red","bold":true,"italic":false}'}} 1
+give @a[tag=!hunter] tripwire_hook[minecraft:custom_name='{"text":"Chest Key","color":"dark_red","bold":true,"italic":false}'] 1
 
 # тп на нужные места - ботиночки в церковь, хантеры в хаб
 tp @a[tag=!hunter] 208 72 -90

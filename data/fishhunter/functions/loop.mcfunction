@@ -128,13 +128,14 @@ execute as @a[scores={mode_boots = 8}] unless entity @e[tag=camera] run title @s
 scoreboard players operation @a[scores={mode_boots = 8,cam_change = 1..}] cam_mode *= hhuy cam_mode
 scoreboard players operation @a[scores={mode_boots = 8,cam_change = 1..}] cam_mode -= hhuy cam_mode
 scoreboard players set @a[scores={mode_boots = 8,cam_change = 1..}] cam_work 1
-execute if entity @a[scores={mode_boots = 8,cam_change = 1..}] run item replace entity @e[tag=camera] armor.head with minecraft:player_head{SkullOwner:Edna_I} 1
+execute if entity @a[scores={mode_boots = 8,cam_change = 1..}] run item replace entity @e[tag=camera] armor.head with minecraft:player_head[minecraft:profile="Edna_I"] 1
+# execute if entity @a[scores={mode_boots = 8,cam_change = 1..}] run item replace entity @e[tag=camera] armor.head with minecraft:player_head{SkullOwner:Edna_I} 1
 scoreboard players set @a[scores={mode_boots = 8,cam_change = 1..}] cam_change 0
 
 data modify entity @e[tag=camera, limit=1] Rotation[0] set from entity @a[limit=1, scores={mode_boots = 8,cam_mode = 1}] Rotation[0]
 execute at @a[limit=1, scores={mode_boots = 8,cam_mode = 1}] run tp @e[tag=camera, limit=1] ^1 ^1 ^2
 
-execute store success score @a[tag=hunter] cam_destroy run clear @a[tag=hunter] minecraft:player_head{SkullOwner: {Id: [I; -1603909985, 514476567, -1545101897, -736314301], Properties: {textures: [{Value: "ewogICJ0aW1lc3RhbXAiIDogMTcwNzgzNTk1MTYwNSwKICAicHJvZmlsZUlkIiA6ICJhMDY2NDY5ZjFlYWE0YTE3YTNlNzlkYjdkNDFjYmM0MyIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZG5hX0kiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhMWNkYzU0ZGI1NDViN2MwNzM0ZTNhOTI0Nzc2ZThiZDA1OTFiZDVkM2JiNzVkMzk5Zjg0YmEyOTE4ZDkzMSIKICAgIH0KICB9Cn0=", Signature: "VBb4Jo3mgvymA1j4KgOUc7PF8+U49HfVUc5rxX8AFxVv/DQ7NbJYSYh2fsj8thDecF1pSY/jVKmlfgA4cm0EhqFk1IEHQXnaMwZWB/nQW5DiFxOREQyNkU6hVPCuowsefDAbcKVQwpVYfE674msoyIpdrh2AMpf3TkSp6hAVlZ4Q1IwRvPdZMl9j5PrZDiNB08H7q/aRoR/zJpbhiqtLGOdygr/k8jv8zNk5dvqdJ7fI9yxwOCSGdw2zT0FZepSyTx6jJS7g5Pa5uZmn+qc5/YgO5chtYb9JeJ/AQw2Y7oQvNDoCbbfq2DlTsLFq8GdnFZz/lrV1cq7a7Khxppl6AnV8+8/CPtQivjlD+cQUHTmTXm6Vk1byeVUkCElXYf43dx8PEnv0E1oKeUl56Jz18dDqqkqZFVgdCx2PqxNd7yiK97C9FHCnnH/JRzcC5CGPM6y87yb23Peu6xhb0JEnLAfr3IO52v0LD5eRdB+eIR3TKYZ+++FgZSlMi7tDu2y3ACDhGY3nKuniaLhSKjkVqRkthEJyGiz9ZNm+lGWU67zcacZfKaYyXyDCoQDe5s+Z92otnxUz6u8H3mfwZeqdwTcLF0+X+k0ngJh2lNy+U1ZEibn2GRXu2PWfDHWIpUgfm0v/4RRfKVuzKgzgVpFEA/fIn1WCEJjBrwlxsiyx6Jw="}]}, Name: "Edna_I"}}
+# execute store success score @a[tag=hunter] cam_destroy run clear @a[tag=hunter] minecraft:player_head{SkullOwner: {Id: [I; -1603909985, 514476567, -1545101897, -736314301], Properties: {textures: [{Value: "ewogICJ0aW1lc3RhbXAiIDogMTcwNzgzNTk1MTYwNSwKICAicHJvZmlsZUlkIiA6ICJhMDY2NDY5ZjFlYWE0YTE3YTNlNzlkYjdkNDFjYmM0MyIsCiAgInByb2ZpbGVOYW1lIiA6ICJFZG5hX0kiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhMWNkYzU0ZGI1NDViN2MwNzM0ZTNhOTI0Nzc2ZThiZDA1OTFiZDVkM2JiNzVkMzk5Zjg0YmEyOTE4ZDkzMSIKICAgIH0KICB9Cn0=", Signature: "VBb4Jo3mgvymA1j4KgOUc7PF8+U49HfVUc5rxX8AFxVv/DQ7NbJYSYh2fsj8thDecF1pSY/jVKmlfgA4cm0EhqFk1IEHQXnaMwZWB/nQW5DiFxOREQyNkU6hVPCuowsefDAbcKVQwpVYfE674msoyIpdrh2AMpf3TkSp6hAVlZ4Q1IwRvPdZMl9j5PrZDiNB08H7q/aRoR/zJpbhiqtLGOdygr/k8jv8zNk5dvqdJ7fI9yxwOCSGdw2zT0FZepSyTx6jJS7g5Pa5uZmn+qc5/YgO5chtYb9JeJ/AQw2Y7oQvNDoCbbfq2DlTsLFq8GdnFZz/lrV1cq7a7Khxppl6AnV8+8/CPtQivjlD+cQUHTmTXm6Vk1byeVUkCElXYf43dx8PEnv0E1oKeUl56Jz18dDqqkqZFVgdCx2PqxNd7yiK97C9FHCnnH/JRzcC5CGPM6y87yb23Peu6xhb0JEnLAfr3IO52v0LD5eRdB+eIR3TKYZ+++FgZSlMi7tDu2y3ACDhGY3nKuniaLhSKjkVqRkthEJyGiz9ZNm+lGWU67zcacZfKaYyXyDCoQDe5s+Z92otnxUz6u8H3mfwZeqdwTcLF0+X+k0ngJh2lNy+U1ZEibn2GRXu2PWfDHWIpUgfm0v/4RRfKVuzKgzgVpFEA/fIn1WCEJjBrwlxsiyx6Jw="}]}, Name: "Edna_I"}}
 execute if entity @a[tag=hunter, scores={cam_destroy = 1}] run scoreboard players set @a cam_work 0
 scoreboard players set @a[scores={cam_destroy = 1}] cam_destroy 0
 
@@ -142,7 +143,7 @@ scoreboard players set @a[scores={cam_destroy = 1}] cam_destroy 0
 execute store success score @a[scores={mode_boots = 6}] stun_reload run kill @e[type=minecraft:snowball]
 execute as @a[scores={stun_reload = 1}] run kill @e[tag=stun]
 scoreboard players set @a[scores={stun_reload = 1..}] stun_reload 0
-execute at @a[scores={stun_used = 1..}] run summon minecraft:piglin ~ ~ ~ {NoAI:1b,PersistenceRequired:0b,CanPickUpLoot:0b,Silent:1,Age:0,ArmorItems:[{id:"minecraft:netherite_boots",Count:1},{id:"minecraft:netherite_leggings",Count:1},{},{}],ActiveEffects:[{Id:14,Amplifier:0,Duration:2147483647,ShowParticles:0b}],Tags:["stun"]}
+execute at @a[scores={stun_used = 1..}] run summon minecraft:piglin ~ ~ ~ {NoAI:1b,PersistenceRequired:0b,CanPickUpLoot:0b,Silent:1,Age:0,ArmorItems:[{id:"minecraft:netherite_boots",Count:1},{id:"minecraft:netherite_leggings",Count:1},{},{}],active_effects:[{id:"minecraft:invisibility",show_icon: 0b, amplifier:0,duration:-1,show_particles:0b}],Tags:["stun"]}
 scoreboard players set @a[scores={stun_used = 1..}] stun_cd 100
 scoreboard players set @a[scores={stun_used = 1..}] stun_live 600
 # data modify entity @e[tag=stun,limit=1] Rotation set from entity @a[limit=1, scores={stun_cd = 95..}] Rotation
@@ -179,7 +180,7 @@ execute as @a[scores={tp_toggle = 1..}] at @s if entity @e[distance=..15, limit=
 # execute as @a[scores={tp_toggle = 1..}] at @s if entity @e[distance=..15, limit=1,tag=mark] run execute as @a[scores={tp_toggle = 1..}] run tp @s ~ ~ ~ ~ 0
 give @a[scores={tp_toggle = 1..}] minecraft:ender_pearl 1
 clear @a minecraft:bowl
-# scoreboard players set @a[scores={tp_toggle = 1..}] tp_toggle 0
+scoreboard players set @a[scores={tp_toggle = 1..}] tp_toggle 0
 execute as @a[scores={mode_boots=7}] at @s if entity @e[distance=..15, limit=1,tag=mark] run scoreboard players set @s tp_near 1
 execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 1}] actionbar {"text":"You can tp","bold":true,"color":"green"}
 execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7, tp_near = 0}] actionbar {"text":"","bold":true,"color":"green"}

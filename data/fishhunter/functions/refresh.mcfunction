@@ -41,12 +41,12 @@ gamemode adventure @a
 team join Lobby @a
 
 # выдача предметов выбора класса
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.0 with minecraft:lapis_lazuli{display:{Name:'[{"text":"Полуинвиз","italic":false, "color":"green"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.1 with minecraft:feather{display:{Name:'[{"text":"Скорость","italic":false, "color":"green"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.2 with minecraft:rabbit_foot{display:{Name:'[{"text":"Прыгун","italic":false, "color":"green"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.3 with minecraft:heart_of_the_sea{display:{Name:'[{"text":"Танк","italic":false, "color":"green"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.4 with minecraft:clock{display:{Name:'[{"text":"Спецкласс Радар","italic":false, "color":"blue"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.5 with minecraft:amethyst_shard{display:{Name:'[{"text":"Спецкласс Стан","italic":false, "color":"blue"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.6 with minecraft:blaze_powder{display:{Name:'[{"text":"Спецкласс Телепорт","italic":false, "color":"blue"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.7 with minecraft:music_disc_wait{display:{Name:'[{"text":"Спецкласс Наблюдатель","italic":false, "color":"blue"}]'}} 1
-execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.8 with minecraft:diamond{display:{Name:'[{"text":"-не работает-","italic":false, "color":"red"}]'}} 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.0 with minecraft:lapis_lazuli[minecraft:custom_name='{"text":"Полуинвиз","italic":false, "color":"green"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.1 with minecraft:feather[minecraft:custom_name='{"text":"Скорость","italic":false, "color":"green"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.2 with minecraft:rabbit_foot[minecraft:custom_name='{"text":"Прыгун","italic":false, "color":"green"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.3 with minecraft:heart_of_the_sea[minecraft:custom_name='{"text":"Танк","italic":false, "color":"green"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.4 with minecraft:clock[minecraft:custom_name='{"text":"Спецкласс Радар","italic":false, "color":"blue"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.5 with minecraft:amethyst_shard[minecraft:custom_name='{"text":"Спецкласс Стан","italic":false, "color":"blue"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.6 with minecraft:blaze_powder[minecraft:custom_name='{"text":"Спецкласс Телепорт","italic":false, "color":"blue"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.7 with minecraft:music_disc_wait[minecraft:custom_name='{"text":"Спецкласс Наблюдатель","italic":false, "color":"blue"}'] 1
+execute as @e[tag=global, scores={class_toggle = 1}] run item replace entity @a hotbar.8 with minecraft:diamond[minecraft:custom_name='{"text":"-не работает-","italic":false, "color":"red"}'] 1
