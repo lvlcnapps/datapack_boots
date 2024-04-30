@@ -75,6 +75,8 @@ execute store result bossbar minecraft:timer max run scoreboard players get @e[t
 team join hunter @a[tag=hunter]
 team join boots @a[tag=!hunter]
 
+function fishhunter:ban
+
 execute store result score @e[tag=global] bootsCount run scoreboard players get @e[tag=timers, limit=1] bootsCount
 
 # execute store result entity 51eb35c5-41c9-429c-a58f-0b485f95f0f5 Pos[0] double 1 run data get entity LvLLCn LastDeathLocation.pos[0] 1

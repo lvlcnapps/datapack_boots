@@ -1,6 +1,6 @@
 # работа глобального счетчика времени и ловля победы хантера по времени
 scoreboard players remove @e[tag=timers, scores={counter=0..}] counter 1
-execute as @e[tag=timers,scores={counter=0}] run function fishhunter:hunter_win
+execute as @e[tag=timers,scores={counter=0}] run function fishhunter:hunter_win {code:0}
 
 # проверка открытых домов
 execute as @a[scores={check = 1..}] run function fishhunter:show_levers
@@ -39,7 +39,7 @@ execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age:
 # execute as @p[tag=hunter, scores={fish=0}] run function fishhunter:hunter_win
 execute store result score @e[tag=global] tt3 run scoreboard players operation @e[tag=global] tt1 < @e[tag=global] tt2
 scoreboard players operation @e[tag=global] tt3 -= @e[tag=global] tt2
-execute if entity @e[tag=global,scores={tt3 = 0}] run function fishhunter:hunter_win_lost
+execute if entity @e[tag=global,scores={tt3 = 0}] run function fishhunter:hunter_win {code:2}
 
 # отбирание рыбы хантером # исправлено под счетчик 2.0
 execute store success score @a[tag=hunter] fish_win run clear @a[tag=hunter] minecraft:pufferfish
@@ -203,7 +203,7 @@ effect give @a[tag=hunter,scores={dead_cd = 0..}] minecraft:strength infinite 50
 execute as @a[tag=!hunter, team=boots, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run scoreboard players remove @e[tag=timers] bootsCount 1
 execute as @a[tag=!hunter, team=boots, scores={deaths=1..}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:spec
 execute as @e[tag = global, scores={mode_respawn = 0}] run scoreboard players set @a[scores={deaths=1.., lost_fish = 0}] deaths 0
-execute as @e[tag=timers,scores={bootsCount=0}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:hunter_win
+execute as @e[tag=timers,scores={bootsCount=0}] if entity @e[tag=global, scores={mode_respawn = 0}] run function fishhunter:hunter_win {code:3}
 
 # поведение игры при чьй то смерти при вкл респавне, тп на нужные места по кулдауну с выдачей всех эффектов
 execute as @e[tag = global, scores={mode_respawn = 1}] run scoreboard players operation @a[scores={deaths=1..}] dead_cd = @e[tag=global, limit=1] dead_cd
@@ -224,12 +224,18 @@ data modify block 201 9 -71 front_text.messages set value ['{"text":""}', '{"sco
 data modify block 204 9 -73 front_text.messages set value ['{"text":""}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"add_time"}}', '{"text":""}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 1}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
 execute as @e[tag=global,limit=1,scores={class_toggle = 0}] run data modify block 187 8 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow classes:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
-execute as @e[tag=global,limit=1,scores={diff_chat = 1}] run data modify block 185 8 -74 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
-execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 185 8 -74 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
-execute as @e[tag=global,scores={bow_toggle = 1}] run data modify block 187 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
-execute as @e[tag=global,scores={bow_toggle = 0}] run data modify block 187 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
-data modify block 188 14 -71 front_text.messages set value ['{"text":""}', '{"text":"Arrows:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"arrow_count"}}', '{"text":""}']
-data modify block 185 14 -74 front_text.messages set value ['{"text":""}', '{"text":"Fishes:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"tt0"}}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={diff_chat = 1}] run data modify block 181 8 -72 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,limit=1,scores={diff_chat = 0}] run data modify block 181 8 -72 front_text.messages set value ['{"text":"Different"}', '{"text":"Voicechats:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+execute as @e[tag=global,scores={bow_toggle = 1}] run data modify block 176 9 -72 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"ON", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,scores={bow_toggle = 0}] run data modify block 176 9 -72 front_text.messages set value ['{"text":""}', '{"text":"Allow bow:"}', '{"text":"OFF", "color":"red"}', '{"text":""}']
+data modify block 177 9 -72 front_text.messages set value ['{"text":""}', '{"text":"Arrows:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"arrow_count"}}', '{"text":""}']
+data modify block 171 9 -72 front_text.messages set value ['{"text":""}', '{"text":"Fishes:"}', '{"score":{"name":"@e[tag=global,limit=1]","objective":"tt0"}}', '{"text":""}']
+
+execute as @e[tag=global,scores={is_anon_ban=0}] run data modify block 175 8 -76 front_text.messages set value ['{"text":""}', '{"text":"Известно"}', '{"text":"ВСЕМ", "color":"green"}', '{"text":""}']
+execute as @e[tag=global,scores={is_anon_ban=1}] run data modify block 175 8 -76 front_text.messages set value ['{"text":""}', '{"text":"Известно"}', '{"text":"ХАНТЕРУ", "color":"red"}', '{"text":""}']
+
+execute as @e[tag=global,scores={is_test=0}] run data modify block 172 8 -76 front_text.messages set value ['{"text":""}', '{"text":"Тестирование"}', '{"text":"выкл", "color":"red"}', '{"text":""}']
+execute as @e[tag=global,scores={is_test=1}] run data modify block 172 8 -76 front_text.messages set value ['{"text":""}', '{"text":"Тестирование"}', '{"text":"вкл", "color":"green"}', '{"text":""}']
 
 # красивый таймер сверху
 execute store result bossbar minecraft:timer value run scoreboard players get @e[tag=timers, limit=1] counter
