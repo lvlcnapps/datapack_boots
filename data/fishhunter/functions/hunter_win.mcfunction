@@ -1,8 +1,8 @@
 # исправлено под счетчик 2.0
-scoreboard players set @e[tag=global] winner 0
+$scoreboard players set @e[tag=global] winner $(code)
 scoreboard players set @e[tag=global] tt1 0
 
-function fishhunter:logging
+execute as @e[tag=global, scores={is_test = 0}] run function fishhunter:logging
 
 # восстановление рыбов, кулдаун после которого автореколл и очистка одной из переменных, чтоб не лагало
 execute store result score @a fish run scoreboard players get @e[tag=global, limit=1] fish
