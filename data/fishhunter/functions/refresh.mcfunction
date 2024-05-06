@@ -28,6 +28,7 @@ scoreboard players set @a cam_use 0
 scoreboard players set @a cam_work 1
 scoreboard players set @e[tag=global] tt1 0
 scoreboard players operation @e[tag=global] tt4 = @e[tag=global] tt0
+scoreboard players set @a trig_ravine 0
 
 # чистка вещей, эффектов и тегов
 clear @a

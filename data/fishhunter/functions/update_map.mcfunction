@@ -10,6 +10,8 @@ setblock 201 79 -142 minecraft:redstone_block destroy
 setblock 115 64 -120 minecraft:redstone_block destroy
 setblock 117 69 -66 minecraft:redstone_block destroy
 setblock 161 75 16 minecraft:redstone_block destroy
+setblock 155 68 -79 minecraft:redstone_block destroy
+setblock 164 53 -85 minecraft:redstone_block destroy
 
 kill @e[tag=stun]
 kill @e[tag=mark]
