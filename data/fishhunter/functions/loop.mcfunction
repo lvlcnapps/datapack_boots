@@ -21,15 +21,16 @@ scoreboard players remove @a[scores={tank_cd = 0..}] tank_cd 1
 give @a[scores={tank_cd = 0}] minecraft:honey_bottle 1
 
 # распределение по классам ботиночков
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:lapis_lazuli"}}] mode_boots 1
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:feather"}}] mode_boots 2
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:rabbit_foot"}}] mode_boots 3
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:heart_of_the_sea"}}] mode_boots 4
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:clock"}}] mode_boots 5
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:amethyst_shard"}}] mode_boots 6
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:blaze_powder"}}] mode_boots 7
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:music_disc_wait"}}] mode_boots 8
-scoreboard players set @a[nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 9
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:lapis_lazuli"}}] mode_boots 1
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:feather"}}] mode_boots 2
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:rabbit_foot"}}] mode_boots 3
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:heart_of_the_sea"}}] mode_boots 4
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:clock"}}] mode_boots 5
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:amethyst_shard"}}] mode_boots 6
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:blaze_powder"}}] mode_boots 7
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:music_disc_wait"}}] mode_boots 8
+scoreboard players set @a[tag=!hunter,nbt={SelectedItem: {id:"minecraft:diamond"}}] mode_boots 9
+scoreboard players set @a[tag=hunter] mode_boots 0
 
 # убирать плохолежащие рыбы # исправлено под счетчик 2.0
 execute as @e[type=item, nbt={Item: {id:"minecraft:pufferfish", Count: 1b}, Age: 50s}] run function fishhunter:remove_fish
@@ -78,7 +79,8 @@ kill @e[type=minecraft:arrow, x = 199, y = 72, z = -81, dx = -12, dy = 9, dz = -
 
 # эффекты классов
 execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 2}] minecraft:speed infinite 0 true
-execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 3}] minecraft:jump_boost infinite 1 true
+# execute as @e[tag=global, scores={game = 1}] run effect give @a[tag=!hunter, scores={mode_boots = 3}] minecraft:jump_boost infinite 1 true
+execute as @e[tag=global, scores={game = 1}] run attribute @a[limit=1,tag=!hunter, scores={mode_boots = 3}] minecraft:generic.step_height base set 2.5
 give @a[tag=!hunter, scores={tank_reload = 1..}] minecraft:enchanted_golden_apple 1
 scoreboard players set @a[tag=!hunter, scores={tank_reload = 1..}] tank_reload 0
 
