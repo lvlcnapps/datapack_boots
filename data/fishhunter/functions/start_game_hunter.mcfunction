@@ -2,6 +2,7 @@ clear @a[tag=hunter]
 effect clear @a[tag=hunter]
 gamemode adventure @a[tag=hunter]
 effect give @a[tag=hunter] minecraft:invisibility infinite 1 true
+scoreboard players set @e[tag=data] game 1
 
 item replace entity @a[tag=hunter] armor.feet with minecraft:golden_boots
 item replace entity @a[tag=hunter] armor.legs with minecraft:golden_leggings
@@ -15,7 +16,7 @@ execute if entity @e[tag=data, scores={bow_toggle = 1}] run give @a[tag=hunter] 
 scoreboard players set @a ignite 0
 # execute store result score @e[tag=data] arrow_giver run scoreboard players get @e[tag=data, limit=1] arrow_count
 scoreboard players operation @e[tag=timers] counter = @e[tag=data] counter
-scoreboard players operation @e[tag=timers] fish_all = @e[tag=data] fish_all
+
 execute store result bossbar minecraft:bb1 max run scoreboard players get @e[tag=data, limit=1] counter
 scoreboard players set @e[tag=handle_sushi] cooking_time -2
 scoreboard players set @e[tag=data] choice_tp_boots 0

@@ -1,5 +1,7 @@
 # разрешить снова удалять рыбу и добавить рыбу к общему числу # исправлено под счетчик 2.0
-scoreboard players set @a[tag=!hunter] fish_add 0
+scoreboard players set @a[tag=!hunter] fish_add_burj 0
+scoreboard players set @a[tag=!hunter] fish_add_bur 0
+scoreboard players set @a[tag=!hunter] fish_add_pump 0
 scoreboard players remove @e[tag=timers] fish_all 1
 #scoreboard players add @a fish_counter 1
 # добавление времени за принос рыбы, берется у курицы с тегом глобал

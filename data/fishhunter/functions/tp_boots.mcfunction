@@ -7,5 +7,8 @@ scoreboard players set @e[tag=data] choice_tp_boots 0
 scoreboard players set @e[tag=data] cd_spawn -1
 scoreboard players set @e[tag=data] cd_hunter_spawn 300
 
+give @p[tag=!hunter, scores={mode_boots = 4}] minecraft:ender_pearl 1
+give @p[tag=!hunter, scores={mode_boots = 4}] minecraft:suspicious_stew 1
+
 # open vault chamber for hunter to choose tp
 fill 477 75 -623 477 77 -621 air

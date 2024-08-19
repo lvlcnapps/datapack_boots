@@ -34,6 +34,8 @@ setblock 458 12 -553 minecraft:redstone_block destroy
 # секс-бомба
 # замок - динамит
 
+kill @e[tag=mark]
+
 schedule function fishhunter:delete_shit 5s replace
 schedule function fishhunter:delete_shit 10s replace
 
