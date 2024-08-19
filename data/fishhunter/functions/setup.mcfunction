@@ -1,1 +1,1 @@
-tellraw @a "starting..."
+tellraw @a "starting beta..."

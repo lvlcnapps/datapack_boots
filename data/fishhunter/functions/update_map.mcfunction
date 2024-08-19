@@ -1,31 +1,40 @@
-# обновление карты
+setblock 450 -4 -525 minecraft:redstone_block destroy
+setblock 399 2 -547 minecraft:redstone_block destroy
+setblock 382 2 -684 minecraft:redstone_block destroy
+setblock 538 15 -654 minecraft:redstone_block destroy
+fill 528 -5 -590 528 -5 -593 minecraft:redstone_block destroy
+setblock 425 -15 -602 minecraft:redstone_block destroy
+setblock 449 -12 -649 minecraft:redstone_block destroy
+setblock 395 12 -601 minecraft:redstone_block destroy
+setblock 493 7 -569 minecraft:redstone_block destroy
+setblock 379 7 -687 minecraft:redstone_block destroy
 
-setblock 287 72 -109 minecraft:redstone_block destroy
-setblock 278 65 -64 minecraft:redstone_block destroy
-setblock 217 97 -56 minecraft:redstone_block destroy
-setblock 154 70 -146 minecraft:redstone_block destroy
-# setblock 113 73 18 minecraft:redstone_block destroy
-# setblock 118 71 -37 minecraft:redstone_block destroy
-setblock 201 79 -142 minecraft:redstone_block destroy
-setblock 115 64 -120 minecraft:redstone_block destroy
-setblock 117 69 -66 minecraft:redstone_block destroy
-setblock 161 75 16 minecraft:redstone_block destroy
-setblock 155 68 -79 minecraft:redstone_block destroy
-setblock 164 53 -85 minecraft:redstone_block destroy
-setblock 216 72 10 minecraft:redstone_block destroy
+setblock 431 -15 -603 minecraft:redstone_block destroy
+setblock 426 14 -692 minecraft:redstone_block destroy
+setblock 386 -1 -693 minecraft:redstone_block destroy
+setblock 525 -5 -590 minecraft:redstone_block destroy
 
-kill @e[tag=stun]
-kill @e[tag=mark]
-kill @e[tag=stander]
-kill @e[tag=camera]
-kill @e[type=minecraft:arrow]
+setblock 395 12 -598 minecraft:redstone_block destroy
+setblock 429 -6 -657 minecraft:redstone_block destroy
+setblock 458 12 -553 minecraft:redstone_block destroy
 
-scoreboard players set @e[tag=levers] gekko 0
-scoreboard players set @e[tag=levers] barbie 0
-scoreboard players set @e[tag=levers] elves 0
-scoreboard players set @e[tag=levers] frog 0
-scoreboard players set @e[tag=levers] bomj 0
-scoreboard players set @e[tag=levers] guests 0
+# подземелья / замок
+# суши бар
+# фабрика
+# шизодом
+# бордель
+# теплица
+# грибильня
+# бурж
+# свинина
 
-# через некоторое время удалить все выпавшие рамки и т п
+# теплица - динамит
+# грибы - динамит
+# фабрика - динамит
+# секс-бомба
+# замок - динамит
+
 schedule function fishhunter:delete_shit 5s replace
+schedule function fishhunter:delete_shit 10s replace
+
+say cleaning

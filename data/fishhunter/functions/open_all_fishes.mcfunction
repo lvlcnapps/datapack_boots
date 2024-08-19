@@ -1,9 +1,0 @@
-data merge block 218 71 -136 {Lock:"Chest Key"}
-data merge block 124 83 -91 {Lock:"Chest Key"}
-data merge block 148 80 -46 {Lock:"Chest Key"}
-data merge block 154 78 -5 {Lock:"Chest Key"}
-data merge block 237 82 -26 {Lock:"Chest Key"}
-data merge block 241 81 -53 {Lock:"Chest Key"}
-data merge block 264 78 -89 {Lock:"Chest Key"}
-data merge block 272 83 -109 {Lock:"Chest Key"}
-data merge block 173 75 -132 {Lock:"Chest Key"}
