@@ -2,6 +2,7 @@ clear @a[tag=!hunter]
 effect clear @a[tag=!hunter]
 gamemode adventure @a[tag=!hunter]
 effect give @a[tag=!hunter] minecraft:invisibility infinite 1 true
+tp @a[tag=!hunter] 484 43 -622
 
 item replace entity @a[tag=!hunter] armor.feet with minecraft:leather_boots
 item replace entity @a[tag=!hunter,scores={mode_boots = ..0}] armor.legs with minecraft:leather_leggings
