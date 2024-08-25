@@ -18,5 +18,7 @@ scoreboard players set @e[tag=timers] bootsCount 1
 execute as @a[tag=!hunter] run scoreboard players add @e[tag=timers] bootsCount 1
 scoreboard players remove @e[tag=timers] bootsCount 1
 
+scoreboard players set @a[scores={mode_boots = 6}] body_type 0
+
 bossbar set minecraft:bb1 players sdsdcc2442
 bossbar set minecraft:bb1 players @a

@@ -68,6 +68,30 @@ execute as @e[tag=global, scores={game = 1}] run title @a[scores={mode_boots = 7
 scoreboard players set @a tp_near 0
 
 
+execute store success score @a[scores={mode_boots = 6}] duble_reload run kill @e[type=minecraft:snowball]
+execute as @a[scores={duble_reload = 1}] run kill @e[tag=duble]
+scoreboard players set @a[scores={duble_reload = 1..}] duble_reload 0
+execute at @a[scores={mode_boots = 6, duble_used = 1..}] run summon minecraft:piglin ~ ~ ~ {NoAI:1b,PersistenceRequired:0b,CanPickUpLoot:0b,Silent:1,Age:0,ArmorItems:[{id:"minecraft:leather_boots",Count:1},{id:"minecraft:leather_leggings",Count:1},{},{}],active_effects:[{id:"minecraft:invisibility",show_icon: 0b, amplifier:0,duration:-1,show_particles:0b}],Tags:["duble"]}
+scoreboard players set @a[scores={duble_used = 1..}] duble_cd 100
+scoreboard players set @a[scores={duble_used = 1..}] duble_used 0
+
+effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:darkness 3 50 true
+effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:slowness 3 50 true
+effect give @a[tag=hunter, scores={killed_fake = 1..}] minecraft:jump_boost 3 128 true
+execute as @a[scores={killed_fake = 1..}] run title @a[scores={mode_boots = 6}] actionbar {"text":"Stunned","bold":true,"color":"blue"}
+scoreboard players set @a[scores={killed_fake = 1..}] killed_fake 0
+
+scoreboard players remove @a[scores={duble_cd = 0..}] duble_cd 1
+give @a[scores={duble_cd = 0}] minecraft:snowball 1
+
+execute at @a[scores={mode_boots = 6, change_body_handler = 1..}] run function fishhunter:change_body
+execute as @a[scores={change_body_handler = 1..}] run kill @e[type=minecraft:eye_of_ender]
+scoreboard players set @a[scores={change_body_handler = 1..}] change_body_cd 100
+scoreboard players set @a[scores={change_body_handler = 1..}] change_body_handler 0
+
+scoreboard players remove @a[scores={change_body_cd = 0..}] change_body_cd 1
+give @a[scores={change_body_cd = 0}] minecraft:ender_eye 1
+
 execute as @e[tag=timers, scores={counter=..500}] run bossbar set minecraft:bb1 color red
 execute as @e[tag=timers, scores={counter=500..1500}] run bossbar set minecraft:bb1 color yellow
 execute as @e[tag=timers, scores={counter=1500..}] run bossbar set minecraft:bb1 color green
