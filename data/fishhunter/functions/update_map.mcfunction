@@ -69,3 +69,5 @@ schedule function fishhunter:delete_shit 5s replace
 schedule function fishhunter:delete_shit 10s replace
 
 say cleaning
+
+kill @e[type=minecraft:chicken, tag=!data, tag=!timers]

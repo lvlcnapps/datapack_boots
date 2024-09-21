@@ -1,0 +1,7 @@
+# выдача предметов выбора класса
+clear @s
+item replace entity @s hotbar.0 with minecraft:tnt[minecraft:custom_name='{"text":"Подрывник","italic":false, "color":"green"}',minecraft:lore=["{\"text\":\"Сложность: ★\",\"color\":\"green\"}","{\"text\":\"Имеет на руках 3 взрывчатки,\",\"italic\":true,\"color\":\"aqua\"}", "{\"text\":\"которую может кидать и убивать\",\"italic\":true,\"color\":\"aqua\"}", "{\"text\":\"всех в небольшом радиусе\",\"italic\":true,\"color\":\"aqua\"}"]] 1
+item replace entity @s hotbar.1 with minecraft:netherite_helmet[minecraft:custom_name='{"text":"Черная Смерть","italic":false, "color":"green"}',minecraft:lore=["{\"text\":\"Сложность: ★\",\"color\":\"green\"}","{\"text\":\"Страшен не только своей скоростью\",\"italic\":true,\"color\":\"aqua\"}", "{\"text\":\"и смертоносностью, но и неизвестным\",\"italic\":true,\"color\":\"aqua\"}", "{\"text\":\"местоположением, из-за своей брони\",\"italic\":true,\"color\":\"aqua\"}"]] 1
+item replace entity @s hotbar.2 with minecraft:lead[minecraft:custom_name='{"text":"Спецкласс Инженер","italic":false, "color":"blue"}', minecraft:lore=["{\"text\":\"Сложность: ★\",\"color\":\"green\"}","{\"text\":\"Может ставить ловушку, которая\",\"italic\":true,\"color\":\"aqua\"}", "{\"text\":\"реагирует на пробегающих мимо\",\"italic\":true,\"color\":\"aqua\"}", "{\"text\":\"ботиночков и подсвечивает их\",\"italic\":true,\"color\":\"aqua\"}"]] 1
+
+item replace entity @s hotbar.8 with minecraft:diamond[minecraft:custom_name='{"text":"-не работает-","italic":false, "color":"red"}'] 1
